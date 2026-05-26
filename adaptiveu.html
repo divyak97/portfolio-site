@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdaptiveU LMS — Divya Karunakaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #ffffff;
+      --bg2:        #f5f5f5;
+      --bg3:        #eeeeee;
+      --border:     rgba(0,0,0,0.08);
+      --border-h:   rgba(0,0,0,0.15);
+      --text:       #111111;
+      --text-2:     #555555;
+      --text-3:     #999999;
+      --accent:     #4f6ef7;
+      --accent-l:   #7b94f9;
+      --accent-bg:  rgba(79,110,247,0.06);
+      --radius:     16px;
+      --radius-sm:  10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); border-color: var(--border-h); }
+    .nav-back::before { content: "←"; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── HERO ── */
+    .hero { padding: 148px 24px 64px; max-width: 860px; margin: 0 auto; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 20px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 5.5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+
+    .meta-item {
+      padding: 20px 28px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── HERO IMAGE ── */
+    .hero-cover {
+      width: 100%;
+      height: 460px;
+      background: linear-gradient(135deg, #eef1fe 0%, #dde4fd 40%, #c8d3fb 100%);
+      border-radius: var(--radius);
+      border: 1px solid rgba(79,110,247,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-cover::before {
+      content: "";
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,110,247,0.1) 0%, transparent 70%);
+      top: -120px; right: -80px;
+    }
+    .hero-cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    /* ── METRICS ROW ── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+
+    .metric-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+    }
+
+    .metric-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .metric-num .accent { color: var(--accent); }
+
+    .metric-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 64px 0; border-top: 1px solid var(--border); }
+
+    .section-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.8;
+      max-width: 700px;
+    }
+    .section-body + .section-body { margin-top: 16px; }
+    .section-body strong { color: var(--text); font-weight: 600; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--accent-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 22px 28px;
+      margin: 32px 0;
+    }
+    .callout p {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* ── INSIGHT BOX ── */
+    .insight-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .insight-box-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .insight-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .insight-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .insight-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+    .insight-list li strong { color: var(--text); font-weight: 600; }
+
+    /* ── SCREEN PLACEHOLDER ── */
+    .screen {
+      width: 100%;
+      background: var(--bg2);
+      border: 1.5px dashed rgba(79,110,247,0.2);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 32px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+    }
+    .screen-sm  { height: 200px; }
+    .screen-md  { height: 320px; }
+    .screen-lg  { height: 460px; }
+    .screen-xl  { height: 560px; }
+
+    .screen-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(79,110,247,0.2);
+      border-radius: 50px;
+      padding: 4px 12px;
+    }
+    .screen-title { font-size: 13px; font-weight: 500; color: var(--text-3); text-align: center; padding: 0 20px; }
+
+    /* ── GRIDS ── */
+    .screen-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
+    .screen-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 32px 0; }
+
+    /* ── PAIN POINT CARDS ── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .pain-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pain-card:hover { border-color: var(--border-h); transform: translateY(-2px); }
+    .pain-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .pain-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── PROCESS STEPS ── */
+    .process-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 32px 0;
+    }
+    .process-step {
+      padding: 24px 20px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .process-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .process-step-body { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+    /* ── DECISION TABLE ── */
+    .decision-grid { display: flex; flex-direction: column; gap: 10px; margin: 32px 0; }
+    .decision-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+      align-items: start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 24px;
+      transition: border-color 0.2s;
+    }
+    .decision-row:hover { border-color: var(--border-h); }
+    .decision-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .decision-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+    /* ── RESULTS ── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .result-card {
+      background: var(--accent-bg);
+      border: 1px solid rgba(79,110,247,0.15);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .result-num {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .result-desc { font-size: 14px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── LEARNINGS ── */
+    .learnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
+    .learning-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .learning-card:hover { border-color: var(--border-h); }
+    .learning-card .num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(79,110,247,0.15);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .learning-card .title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .learning-card .body { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+
+    /* ── THANK YOU ── */
+    .thankyou {
+      text-align: center;
+      padding: 80px 24px 96px;
+      border-top: 1px solid var(--border);
+    }
+    .thankyou h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .thankyou p { font-size: 16px; color: var(--text-2); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-back:hover { color: var(--text); border-color: var(--border-h); }
+    .footer-back::before { content: "←"; }
+    .footer-credit { font-size: 13px; color: var(--text-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 56px; }
+      .meta-row { grid-template-columns: 1fr 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .screen-grid-2 { grid-template-columns: 1fr; }
+      .screen-grid-3 { grid-template-columns: 1fr; }
+      .process-row { grid-template-columns: 1fr 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .learnings-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="home.html" class="nav-logo">Divya Karunakaran</a>
+    <a href="home.html" class="nav-back">Back to works</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">Case Study · AdaptiveU / Full Creative</div>
+      <h1 class="hero-title">Redesigning course creation for an LMS — from high friction to 51% completion</h1>
+      <p class="hero-subtitle">
+        How we transformed a complex, abandonment-heavy course builder into an intuitive, flexible experience that empowered instructors to create and publish faster — boosting platform adoption and retention.
+      </p>
+
+      <div class="meta-row">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Lead Product Designer</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Product</div>
+          <div class="meta-value">AdaptiveU LMS<br>Course Builder</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Methods</div>
+          <div class="meta-value">User Research · Testing<br>Competitive Analysis</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Tools</div>
+          <div class="meta-value">Figma · InVision<br>Hotjar · FullStory</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="hero-cover">
+      <span style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(79,110,247,0.35); position:relative">Hero Screen</span>
+      <span style="font-size:12px; color:rgba(0,0,0,0.2); position:relative">AdaptiveU — Final course builder</span>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">51%</span></div>
+        <div class="metric-desc">Course creation flow completion — up from under 20%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">&lt;20%</span></div>
+        <div class="metric-desc">Where we started — course conversion rate at baseline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">↑</span></div>
+        <div class="metric-desc">Platform adoption and long-term user retention</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">↓</span></div>
+        <div class="metric-desc">Abandonment and instructor frustration</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 1: OVERVIEW ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">01</div>
+      <div class="section-kicker">Project Overview</div>
+      <h2 class="section-title">The core engine of an LMS was broken</h2>
+
+      <p class="section-body">
+        AdaptiveU is a SaaS-based Learning Management System that helps organizations onboard, train, and upskill their employees and customers through custom courses. As the lead designer on the Course Creation feature, I owned the end-to-end redesign of the course builder as part of a larger platform revamp.
+      </p>
+
+      <p class="section-body">
+        The existing experience was a major bottleneck. Instructors struggled to build courses, leading to abandoned drafts, low content volume, and poor retention. <strong>Course creation is the core engine of an LMS</strong> — when instructors can't build efficiently, fewer trainings are delivered, learners get less value, and retention drops.
+      </p>
+
+      <div class="callout">
+        <p>When the post-pandemic surge brought a significant spike in sign-ups, course conversion rates sat under 20%. Users were starting courses and never finishing them.</p>
+      </div>
+
+      <div class="screen screen-lg">
+        <span class="screen-tag">Before</span>
+        <span class="screen-title">Existing course builder — high friction, high drop-off</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 2: THE PROBLEM ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">02</div>
+      <div class="section-kicker">The Problem</div>
+      <h2 class="section-title">Why instructors gave up before publishing</h2>
+
+      <p class="section-body">
+        The vicious cycle was clear: low content supply led to lower learner engagement, which hurt retention and platform adoption. Instructors needed to create courses to deliver value — but the tool was getting in their way at every step.
+      </p>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-num">01</div>
+          <div class="pain-title">No way to easily create multiple lessons or steps</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">02</div>
+          <div class="pain-title">Rearranging content was a major, recurring frustration</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">03</div>
+          <div class="pain-title">Rigid structure with high cognitive load from the start</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">04</div>
+          <div class="pain-title">No flexibility for different content types — video, files, text, quizzes</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">05</div>
+          <div class="pain-title">No autosave — lost progress killed trust and momentum</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">06</div>
+          <div class="pain-title">Multiple setup steps required before users could add any content</div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-box-title">The design goal</div>
+        <p style="font-size:17px; font-weight:600; color:var(--text); line-height:1.5">
+          Design an intuitive, flexible course builder that reduces cognitive load, supports fast content addition and rearrangement, includes autosave, and helps instructors complete and publish courses faster.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 3: RESEARCH ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">03</div>
+      <div class="section-kicker">Research & Discovery</div>
+      <h2 class="section-title">Finding the truth in the data</h2>
+
+      <p class="section-body">
+        I combined quantitative and qualitative methods to triangulate where the experience was breaking down — and why.
+      </p>
+
+      <div class="insight-box">
+        <div class="insight-box-title">Research methods used</div>
+        <ul class="insight-list">
+          <li><strong>Session recordings &amp; analytics</strong> — Hotjar and FullStory confirmed high abandonment points and the exact steps where users dropped off</li>
+          <li><strong>Support chat analysis</strong> — ChatSupport transcripts revealed recurring pain around content uploads, rearrangement, and data loss without autosave</li>
+          <li><strong>User interviews</strong> — Instructors consistently said they wanted to "jump in and start building" rather than follow a rigid wizard</li>
+          <li><strong>Competitive analysis</strong> — Studied Coursera, Udemy, TalentLMS, and Docebo for best practices in content addition, drag-and-drop, and editor UX</li>
+          <li><strong>Internal team synthesis</strong> — Aligned with the broader platform redesign to incorporate navigation, personalization, and content organisation patterns</li>
+        </ul>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Research</span>
+          <span class="screen-title">Session recording / Hotjar heatmap findings</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Research</span>
+          <span class="screen-title">Competitive analysis — Coursera, Udemy, TalentLMS</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <p class="section-body"><strong>Core insight on course structure:</strong></p>
+        <p class="section-body">A course functions like a book — one Course contains multiple Lessons, each holding multiple Steps (sub-topics), and within each step, various Content Blocks (text, video, files, etc.). This mental model became foundational to every design decision.</p>
+      </div>
+
+      <div class="callout" style="margin-top: 28px;">
+        <p>"As an instructor, I want to create and publish courses easily so I can deliver great learning experiences and drive real training outcomes."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 4: DESIGN PROCESS ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">04</div>
+      <div class="section-kicker">Design Process</div>
+      <h2 class="section-title">Discover → Define → Develop → Deliver</h2>
+
+      <div class="process-row">
+        <div class="process-step">
+          <div class="process-step-num">01</div>
+          <div class="process-step-title">Discover</div>
+          <div class="process-step-body">Analytics, session recordings, support chats, interviews</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">02</div>
+          <div class="process-step-title">Define</div>
+          <div class="process-step-body">Opportunity statement, priority matrix, mental model</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">03</div>
+          <div class="process-step-title">Develop</div>
+          <div class="process-step-body">Paper wireframes, flows, InVision prototypes, testing</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">04</div>
+          <div class="process-step-title">Deliver</div>
+          <div class="process-step-body">Figma designs, developer collaboration, design system</div>
+        </div>
+      </div>
+
+      <p class="section-body">I started with paper wireframes to move quickly, presenting pros and cons to align the team early. Two directions emerged: a guided wizard (teaches structure upfront) vs. a direct, flexible builder (trust the user).</p>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Early ideation</span>
+          <span class="screen-title">Paper wireframes — initial flow explorations</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Exploration</span>
+          <span class="screen-title">Wizard flow vs. direct builder — options presented to team</span>
+        </div>
+      </div>
+
+      <div class="insight-box" style="margin-top: 32px;">
+        <div class="insight-box-title">Key insights from early brainstorming</div>
+        <ul class="insight-list">
+          <li>Users should start adding content <strong>immediately</strong> after naming the course — delay equals abandonment</li>
+          <li><strong>Horizontal content palettes</strong> improve scanning and drag-and-drop discoverability</li>
+          <li>Default structures (one Lesson + one Step pre-created) help beginners without limiting power users</li>
+          <li>A <strong>persistent outline view</strong> in a left panel keeps structure visible at all times — orientation without interruption</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 5: THE PIVOT ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">05</div>
+      <div class="section-kicker">The Pivot</div>
+      <h2 class="section-title">Dropping the wizard. Trusting the instructor.</h2>
+
+      <p class="section-body">
+        Prototype testing showed the guided wizard approach created too much cognitive load for new users — the very people it was meant to help. They felt stuck in a setup mode before doing any real work.
+      </p>
+
+      <p class="section-body">
+        <strong>The pivot:</strong> shift to a direct-entry builder. Users land straight into the editing interface after entering the course name. All default elements are editable on hover. Settings (thumbnail, description, category) are accessible at any time via a dedicated tab — not a gate.
+      </p>
+
+      <div class="screen screen-lg">
+        <span class="screen-tag">After pivot</span>
+        <span class="screen-title">Direct-entry builder — landing straight into content creation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 6: KEY DECISIONS ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">06</div>
+      <div class="section-kicker">Key Design Decisions</div>
+      <h2 class="section-title">Every decision tied to a user or business reason</h2>
+
+      <div class="decision-grid">
+        <div class="decision-row">
+          <div class="decision-label">Content block layout</div>
+          <div class="decision-desc">Horizontal palette over vertical list — improves scanning, makes drag-and-drop more intuitive, reduces the mental effort of building a lesson.</div>
+        </div>
+        <div class="decision-row">
+          <div class="decision-label">Text editor toolbar</div>
+          <div class="decision-desc">Explicit persistent toolbar (not floating) — tested both with users; explicit was consistently preferred for clarity and consistency across content types.</div>
+        </div>
+        <div class="decision-row">
+          <div class="decision-label">Rearrange affordance</div>
+          <div class="decision-desc">Explored multiple drag handles and icons before settling on the most intuitively understood one from user testing — small decision, high discoverability impact.</div>
+        </div>
+        <div class="decision-row">
+          <div class="decision-label">Progressive disclosure</div>
+          <div class="decision-desc">Advanced options hidden until needed — reduces initial cognitive load while preserving full power for experienced instructors who want it.</div>
+        </div>
+        <div class="decision-row">
+          <div class="decision-label">Autosave</div>
+          <div class="decision-desc">Strong, visible autosave was non-negotiable. Lost progress was one of the most cited reasons for abandonment — removing that anxiety was a trust-building requirement.</div>
+        </div>
+        <div class="decision-row">
+          <div class="decision-label">Layout structure</div>
+          <div class="decision-desc">Left panel for course outline (lessons/steps), main area for content editing — mirrors familiar document editors (Notion, Docs) and keeps structure always visible without interrupting flow.</div>
+        </div>
+      </div>
+
+      <div class="screen screen-xl">
+        <span class="screen-tag">Final design</span>
+        <span class="screen-title">Full course builder — left panel outline + main editing area</span>
+      </div>
+
+      <div class="screen-grid-3">
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Content</span>
+          <span class="screen-title">Content block palette — horizontal layout</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Editor</span>
+          <span class="screen-title">Text editor with explicit toolbar</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Reorder</span>
+          <span class="screen-title">Drag-and-drop rearrangement in action</span>
+        </div>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Settings</span>
+          <span class="screen-title">Course settings tab — accessible anytime, not a gate</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Autosave</span>
+          <span class="screen-title">Autosave state — trust signal always visible</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 7: BEFORE / AFTER ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">07</div>
+      <div class="section-kicker">Before vs After</div>
+      <h2 class="section-title">The experience transformation</h2>
+
+      <p class="section-body">
+        The redesigned course builder lets instructors focus on content quality instead of fighting the interface. Rich multimedia, seamless rearrangement, and a persistent structure view at every step.
+      </p>
+
+      <div class="screen screen-xl">
+        <span class="screen-tag">Comparison</span>
+        <span class="screen-title">Before vs. After — side-by-side course builder</span>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Before</span>
+          <span class="screen-title">Old flow — rigid wizard, setup before content</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">After</span>
+          <span class="screen-title">New flow — direct entry, content-first</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 8: RESULTS ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">08</div>
+      <div class="section-kicker">Results & Impact</div>
+      <h2 class="section-title">A 51% completion rate — and a healthier platform</h2>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-num">51%</div>
+          <div class="result-desc">Course creation flow completion — more than doubled from under 20%</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">↑</div>
+          <div class="result-desc">Platform adoption — new sign-ups converted into active, long-term users</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">↓</div>
+          <div class="result-desc">Abandonment and instructor frustration across all user segments</div>
+        </div>
+      </div>
+
+      <p class="section-body">
+        Users successfully added multimedia content, rearranged lessons and steps easily, and published more courses. Greater content supply directly improved the learner experience — turning the vicious cycle into a virtuous one. New sign-ups became active, long-term users because the core value of the platform — creating training — was finally accessible.
+      </p>
+
+      <div class="screen screen-md">
+        <span class="screen-tag">Impact</span>
+        <span class="screen-title">Published course — instructor success state</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 9: TAKEAWAYS ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">09</div>
+      <div class="section-kicker">Reflections</div>
+      <h2 class="section-title">What this project taught me</h2>
+
+      <div class="learnings-grid">
+        <div class="learning-card">
+          <div class="num">01</div>
+          <div class="title">Start with user value immediately</div>
+          <div class="body">Remove barriers to the first meaningful action. Forcing education upfront delays value — and users leave before they've experienced why the product matters.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">02</div>
+          <div class="title">Data + rapid prototyping is a powerful combination</div>
+          <div class="body">Combining analytics, session recordings, and quick Figma/InVision tests gave us directional confidence fast — saving significant rework down the line.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">03</div>
+          <div class="title">Flexibility with smart defaults wins</div>
+          <div class="body">Support both beginners and power users without overwhelming anyone. Pre-set defaults lower the barrier; full flexibility keeps experts happy.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">04</div>
+          <div class="title">Involve developers early</div>
+          <div class="body">Aligning with engineers throughout — not just at handoff — created a cohesive, technically grounded outcome and avoided late-stage surprises.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">05</div>
+          <div class="title">Tie every decision to business outcomes</div>
+          <div class="body">Focusing on completion, conversion, and retention helped prioritise ruthlessly. Design decisions without a business reason are hard to defend and easy to cut.</div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 40px;">
+        <p>Working on AdaptiveU taught me to think like an owner: connect every design choice to retention, adoption, and user success. Simplicity in execution is the hardest part — and the most worth fighting for.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="container">
+    <div class="thankyou">
+      <h2>Thank you for reading</h2>
+      <p>More case studies on the way.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="home.html" class="footer-back">Go back to works</a>
+    <span class="footer-credit">Divya Karunakaran · Sr. Product Designer</span>
+  </footer>
+
+</body>
+</html>

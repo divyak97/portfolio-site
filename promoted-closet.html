@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promoted Closet — Divya Karunakaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #ffffff;
+      --bg2:        #f5f5f5;
+      --bg3:        #eeeeee;
+      --border:     rgba(0,0,0,0.08);
+      --border-h:   rgba(0,0,0,0.15);
+      --text:       #111111;
+      --text-2:     #555555;
+      --text-3:     #999999;
+      --accent:     #094074;
+      --accent-l:   #1a6aad;
+      --radius:     16px;
+      --radius-sm:  10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+    }
+    .nav-back:hover { color: var(--text); border-color: var(--border-h); }
+    .nav-back::before { content: "←"; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 148px 24px 64px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 20px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      gap: 0;
+      margin-bottom: 56px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .meta-item {
+      padding: 20px 28px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── HERO IMAGE PLACEHOLDER ── */
+    .hero-cover {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid rgba(9,64,116,0.12);
+      margin-bottom: 80px;
+      overflow: hidden;
+    }
+    .hero-cover::before {
+      content: "";
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(9,64,116,0.08) 0%, transparent 70%);
+      top: -100px; right: -100px;
+    }
+    .screen-placeholder-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(9,64,116,0.35);
+    }
+    .screen-placeholder-hint {
+      font-size: 12px;
+      color: rgba(0,0,0,0.2);
+    }
+
+    /* ── METRICS ── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+
+    .metric-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+    }
+
+    .metric-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric-num .accent { color: var(--accent); }
+
+    .metric-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .section-body + .section-body { margin-top: 16px; }
+
+    .section-body strong { color: var(--text); font-weight: 600; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: linear-gradient(135deg, rgba(9,64,116,0.05) 0%, rgba(26,106,173,0.03) 100%);
+      border: 1px solid rgba(9,64,116,0.15);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout p {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .callout-source {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ── INSIGHT BOX ── */
+    .insight-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 32px 0;
+    }
+
+    .insight-box-split {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .insight-box-text {
+      flex: 1;
+      padding: 32px 0 32px 32px;
+      min-width: 0;
+    }
+
+    .insight-box-img {
+      flex-shrink: 0;
+      width: 42%;
+    }
+
+    .insight-box-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .insight-box-split { flex-direction: column; }
+      .insight-box-text { padding: 24px 24px 0; }
+      .insight-box-img { width: 100%; }
+    }
+
+    .insight-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+
+    .insight-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .insight-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .insight-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .insight-list li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── SCREEN PLACEHOLDER ── */
+    .screen {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px dashed rgba(0,0,0,0.12);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 32px 0;
+      cursor: default;
+    }
+
+    .screen-sm  { height: 200px; }
+    .screen-md  { height: 320px; }
+    .screen-lg  { height: 440px; }
+    .screen-xl  { height: 520px; }
+
+    .screen-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(9,64,116,0.07);
+      border: 1px solid rgba(9,64,116,0.15);
+      border-radius: 50px;
+      padding: 4px 12px;
+    }
+
+    .screen-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-3);
+    }
+
+    /* ── 2-UP GRID ── */
+    .screen-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .screen-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    /* ── PIVOT COMPARISON ── */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .comparison-side {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .comparison-side.after {
+      background: linear-gradient(135deg, rgba(9,64,116,0.05) 0%, rgba(26,106,173,0.03) 100%);
+      border-color: rgba(9,64,116,0.2);
+    }
+
+    .comparison-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+
+    .comparison-side.after .comparison-label { color: var(--accent); }
+
+    .comparison-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .comparison-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comparison-items li {
+      font-size: 14px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comparison-items li .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .comparison-side.after .comparison-items li .dot { background: var(--accent); }
+
+    /* ── LIFT TABLE ── */
+    .lift-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 32px 0;
+    }
+
+    .lift-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 24px;
+      transition: border-color 0.2s;
+    }
+    .lift-row:hover { border-color: var(--border-h); }
+
+    .lift-desc {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .lift-context {
+      font-size: 13px;
+      color: var(--text-2);
+      margin-top: 3px;
+    }
+
+    .lift-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(9,64,116,0.08);
+      border: 1px solid rgba(9,64,116,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      white-space: nowrap;
+    }
+
+    .lift-badge.tbd {
+      color: var(--text-3);
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    /* ── LEARNINGS ── */
+    .learnings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .learning-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .learning-card:hover { border-color: var(--border-h); }
+
+    .learning-card .num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(9,64,116,0.15);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .learning-card .title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .learning-card .body {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* ── THANK YOU ── */
+    .thankyou {
+      text-align: center;
+      padding: 80px 24px 96px;
+      border-top: 1px solid var(--border);
+    }
+
+    .thankyou h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .thankyou p { font-size: 16px; color: var(--text-2); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-back:hover { color: var(--text); border-color: var(--border-h); }
+    .footer-back::before { content: "←"; }
+
+    .footer-credit { font-size: 13px; color: var(--text-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 56px; }
+      .meta-row { grid-template-columns: 1fr 1fr; }
+      .meta-item { border-bottom: 1px solid var(--border); }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .comparison { grid-template-columns: 1fr; }
+      .screen-grid-2 { grid-template-columns: 1fr; }
+      .screen-grid-3 { grid-template-columns: 1fr; }
+      .learnings-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ── SECTION IMAGE ── */
+    .section-image {
+      margin: 40px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .section-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius);
+    }
+
+    /* ── PERSONAS ── */
+    .personas-section { margin-top: 40px; }
+
+    .personas-intro {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .persona-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* top row: avatar + name */
+    .persona-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .persona-avatar {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 1.5px dashed var(--border-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .persona-avatar-label {
+      font-size: 10px;
+      color: var(--text-3);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .persona-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .persona-tag {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    /* attributes mini-table */
+    .persona-attrs {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .persona-attr {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .persona-attr:last-child { border-bottom: none; }
+
+    .attr-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      background: var(--bg3);
+      padding: 7px 10px;
+      width: 80px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .attr-value {
+      font-size: 12.5px;
+      color: var(--text-2);
+      padding: 7px 10px;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+    }
+
+    /* quote */
+    .persona-quote {
+      font-size: 13px;
+      color: var(--text-2);
+      font-style: italic;
+      line-height: 1.55;
+      padding-left: 10px;
+      border-left: 2px solid var(--accent);
+      flex: 1;
+    }
+
+    /* user story */
+    .persona-story {
+      background: rgba(9,64,116,0.05);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .persona-story-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .persona-story-text {
+      font-size: 12.5px;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 700px) {
+      .persona-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="home.html" class="nav-logo">Divya Karunakaran</a>
+    <a href="home.html" class="nav-back">Back to works</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">Case Study · Poshmark</div>
+      <h1 class="hero-title">Building Poshmark's first seller ads platform — <span style="color:var(--accent)">Promoted Closet</span></h1>
+      <p class="hero-subtitle">
+        How we transformed a complex advertising system into a simple growth tool for everyday sellers — driving adoption, conversion, and monetization across web and mobile.
+      </p>
+
+      <!-- META -->
+      <div class="meta-row">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Lead Product Designer<br>Monetization</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-value">2022 – Present<br>3.5 years</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Platforms</div>
+          <div class="meta-value">Web · iOS<br>Android</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Team</div>
+          <div class="meta-value">PM · Eng · Data<br>Research · Marketing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO COVER -->
+    <div class="hero-cover">
+      <img src="first-hero-image.png" alt="Promoted Closet Dashboard" style="width:100%; height:auto; display:block; border-radius:var(--radius);" />
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">+22%</span></div>
+        <div class="metric-desc">Free trial starts from payment method expansion</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">+5%</span></div>
+        <div class="metric-desc">Free trial starts from pre-listing boost entry point</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">2×</span></div>
+        <div class="metric-desc">Conversion lift from My Closet app entry point</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">↑</span></div>
+        <div class="metric-desc">CTR lift on buyer side from "Promoted" → "Ad" relabel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 1: THE OPPORTUNITY ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">01</div>
+      <div class="section-kicker">The Opportunity</div>
+      <h2 class="section-title">Turning a business concept into a seller product</h2>
+
+      <p class="section-body">
+        Poshmark sellers rely on the platform for real income. But the marketplace had become saturated, and the only free distribution lever — "sharing" — was losing its effectiveness. Sellers were frustrated, calling it <strong>"a gimmick and a time suck."</strong>
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        Every major competitor — eBay, Etsy, Mercari, Facebook Marketplace — already had a first-party ads product. Poshmark didn't. Discovery interviews with 11 sellers confirmed a clear willingness to pay for better visibility.
+      </p>
+
+      <div class="callout">
+        <p>"You should charge money to have a marketing campaign."</p>
+        <div class="callout-source">— Etoya Makins, Pro Seller</div>
+      </div>
+
+      <p class="section-body">
+        The initial concept resembled traditional marketplace advertising: sellers selecting individual listings, choosing keywords, setting durations, managing campaigns. The business case was strong. But the design challenge quickly revealed itself.
+      </p>
+
+      <div class="insight-box insight-box-split">
+        <div class="insight-box-text">
+          <div class="insight-box-title">The core design challenge</div>
+          <p style="font-size:17px; font-weight:600; color:var(--text); line-height:1.5">
+            Poshmark sellers are not performance marketers.<br>
+            <span style="font-size:16px; font-weight:400; color:var(--text-2)">Most are everyday people selling from their closets — not advertisers familiar with CPC models, campaign setup, or keyword targeting. How might we make advertising feel effortless for them?</span>
+          </p>
+        </div>
+        <div class="insight-box-img">
+          <img src="promoted-hero.png" alt="Promoted Closet — seller using the platform" />
+        </div>
+      </div>
+
+      <!-- PERSONAS -->
+      <div class="personas-section">
+        <div class="personas-intro">Through discovery interviews and research, three distinct seller archetypes emerged — each with different motivations, habits, and pain points around visibility and promotion.</div>
+
+        <div class="persona-grid">
+
+          <!-- Bryn -->
+          <div class="persona-card">
+            <div class="persona-head">
+              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
+              <div>
+                <div class="persona-name">Bryn</div>
+                <div class="persona-tag">Full-Time Luxury Reseller · Desktop</div>
+              </div>
+            </div>
+            <div class="persona-attrs">
+              <div class="persona-attr">
+                <div class="attr-label">Goal</div>
+                <div class="attr-value">Scale luxury sales sustainably</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Pain</div>
+                <div class="attr-value">Sharing fatigue &amp; marketplace saturation</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Need</div>
+                <div class="attr-value">Hands-off visibility boost</div>
+              </div>
+            </div>
+            <div class="persona-quote">"She wants to pick back up the momentum but doesn't have the time for a heavy manual lift."</div>
+            <div class="persona-story">
+              <div class="persona-story-label">User Story</div>
+              <div class="persona-story-text">"As a full-time reseller, I want an effortless way to increase visibility so I can scale sales without spending hours manually sharing listings."</div>
+            </div>
+          </div>
+
+          <!-- Ashley -->
+          <div class="persona-card">
+            <div class="persona-head">
+              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
+              <div>
+                <div class="persona-name">Ashley</div>
+                <div class="persona-tag">Side Hustle Mom · Mobile</div>
+              </div>
+            </div>
+            <div class="persona-attrs">
+              <div class="persona-attr">
+                <div class="attr-label">Goal</div>
+                <div class="attr-value">Reliable side income in less time</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Pain</div>
+                <div class="attr-value">Too little time to manage listings</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Need</div>
+                <div class="attr-value">Simple, trustworthy promotion</div>
+              </div>
+            </div>
+            <div class="persona-quote">"She is constantly looking for a sure-fire way to make more sales in less time so she can still have time for her family."</div>
+            <div class="persona-story">
+              <div class="persona-story-label">User Story</div>
+              <div class="persona-story-text">"As a busy mom managing a side hustle, I want a simple way to increase sales so I can grow my income without sacrificing time with my family."</div>
+            </div>
+          </div>
+
+          <!-- Cody -->
+          <div class="persona-card">
+            <div class="persona-head">
+              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
+              <div>
+                <div class="persona-name">Cody</div>
+                <div class="persona-tag">Sneaker Hustler · Mobile</div>
+              </div>
+            </div>
+            <div class="persona-attrs">
+              <div class="persona-attr">
+                <div class="attr-label">Goal</div>
+                <div class="attr-value">Cycle inventory fast for new drops</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Pain</div>
+                <div class="attr-value">New listings don't get enough visibility</div>
+              </div>
+              <div class="persona-attr">
+                <div class="attr-label">Need</div>
+                <div class="attr-value">Fast, no-fuss ad setup</div>
+              </div>
+            </div>
+            <div class="persona-quote">"He wants to quickly make some sales in his Poshmark closet so he can get a pair."</div>
+            <div class="persona-story">
+              <div class="persona-story-label">User Story</div>
+              <div class="persona-story-text">"As a sneaker reseller, I want a fast and easy way to promote my listings so I can quickly sell inventory and fund upcoming sneaker drops."</div>
+            </div>
+          </div>
+
+        </div><!-- /persona-grid -->
+      </div><!-- /personas-section -->
+
+    </div>
+  </div>
+
+  <!-- ─── SECTION 2: THE PIVOT ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">02</div>
+      <div class="section-kicker">Defining the Product Strategy</div>
+      <h2 class="section-title">The pivot that defined everything</h2>
+
+      <p class="section-body">
+        My first explorations followed the market-standard pattern — a listing-level ad creation flow. Pick listings, set keywords, choose a duration, manage a budget per listing. Standard. Validated by competitors. Logical.
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        Then I presented it in a leadership review with the CEO. The feedback reframed the entire product:
+      </p>
+
+      <div class="callout">
+        <p>Poshmark sellers aren't power advertisers. They're moms, students, side-hustlers. The experience needs to be as simple as they are.</p>
+      </div>
+
+      <p class="section-body">
+        This was the defining moment. Instead of asking sellers to make 10 decisions, we'd ask them to make <strong>one: a daily budget.</strong> Their entire closet would be promoted automatically based on buyer search relevance. They'd only pay per click.
+      </p>
+
+      <!-- COMPARISON -->
+      <div class="comparison">
+        <div class="comparison-side">
+          <div class="comparison-label">Before — Sponsored Listings</div>
+          <div class="comparison-title">Complex, marketer-first</div>
+          <ul class="comparison-items">
+            <li><span class="dot"></span>Manually select listings</li>
+            <li><span class="dot"></span>Choose keywords</li>
+            <li><span class="dot"></span>Set duration per listing</li>
+            <li><span class="dot"></span>Manage bid per item</li>
+            <li><span class="dot"></span>Monitor individual performance</li>
+          </ul>
+        </div>
+        <div class="comparison-side after">
+          <div class="comparison-label">After — Promoted Closet</div>
+          <div class="comparison-title">Simple, seller-first</div>
+          <ul class="comparison-items">
+            <li><span class="dot"></span>Set one daily budget</li>
+            <li><span class="dot"></span>Whole closet auto-promoted</li>
+            <li><span class="dot"></span>Pay only per click</li>
+            <li><span class="dot"></span>Relevance handled by platform</li>
+            <li><span class="dot"></span>Dashboard shows results</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-radius:var(--radius); overflow:hidden; margin:32px 0;">
+        <img src="promoted-closet.png" alt="Promoted Closet — simplified concept" style="width:100%; height:auto; display:block; border-radius:var(--radius);" />
+      </div>
+
+      <div class="insight-box" style="margin-top:32px">
+        <div class="insight-box-title">Senior design insight</div>
+        <p style="font-size:15px; color:var(--text-2); line-height:1.7">
+          The market-standard pattern wasn't wrong — it was wrong <em>for our user.</em> Knowing when to throw away competitor-research-backed precedent and design for the actual person in front of you is the hardest call to make as a designer. This decision defined every UX direction for the next 3 years.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 3: MVP ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">03</div>
+      <div class="section-kicker">MVP Design & Validation</div>
+      <h2 class="section-title">Designing the first web MVP</h2>
+
+      <p class="section-body">
+        We launched on web first — Pro sellers were more active there, and the platform allowed faster experimentation before constraining to mobile. I led the end-to-end UX: onboarding, budget setup, payment flow, dashboard, reporting, and seller education.
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        The biggest challenge was introducing ad concepts without alienating everyday sellers. Through moderated usability testing, we uncovered three recurring issues:
+      </p>
+
+      <div class="insight-box">
+        <div class="insight-box-title">What usability testing revealed</div>
+        <ul class="insight-list">
+          <li><strong>Ad jargon alienated sellers</strong> — "CPM," "impressions," and "ad slots" made them feel they were in the wrong product</li>
+          <li><strong>Content density caused drop-off</strong> — too much text above the fold before they understood the value</li>
+          <li><strong>Perceived complexity = perceived risk</strong> — visual complexity translated directly into hesitation to spend money</li>
+        </ul>
+      </div>
+
+      <p class="section-body">
+        These insights drove a complete language and layout overhaul: replaced ad jargon with seller language ("budget," "views," "sales"), cut overview content density by ~40%, and raised the primary CTA above the fold.
+      </p>
+
+      <!-- ONBOARDING SECTION -->
+      <div style="margin-top:40px">
+        <p style="font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-3); margin-bottom:16px">Forced Onboarding — 3 Core Ideas</p>
+        <p class="section-body">To build confidence before sellers committed any budget, we introduced a lightweight mandatory onboarding focused on just three things sellers needed to understand:</p>
+      </div>
+
+      <div class="screen-grid-3">
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Card 1</span>
+          <span class="screen-title">Your closet is automatically promoted</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Card 2</span>
+          <span class="screen-title">You only pay for clicks</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Card 3</span>
+          <span class="screen-title">You get performance insights</span>
+        </div>
+      </div>
+
+      <div class="screen screen-lg">
+        <span class="screen-tag">Screen</span>
+        <span class="screen-title">Web MVP — Budget setup + Creation flow</span>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Dashboard — Initial MVP</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Language iterations — before/after</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 4: BETA ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">04</div>
+      <div class="section-kicker">Beta Program</div>
+      <h2 class="section-title">Building with sellers, not just for them</h2>
+
+      <p class="section-body">
+        Instead of a broad rollout, we launched through a waitlist-gated beta. I stayed close to sellers through a dedicated Slack workspace, monitored social discussions in Facebook seller groups and YouTube reseller channels, and ran continuous Sprig surveys inside the product.
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        This direct feedback loop directly shaped the product. Sellers told us what they needed — we shipped it.
+      </p>
+
+      <div class="insight-box">
+        <div class="insight-box-title">Seller-requested features we shipped</div>
+        <ul class="insight-list">
+          <li><strong>Listing-level impression data</strong> — sellers wanted to see which items their ads were actually pushing</li>
+          <li><strong>"Sold through ads" attribution</strong> — connect spend to tangible outcomes</li>
+          <li><strong>Yesterday's Highlights banner</strong> — a daily dopamine hit so the product felt alive every morning</li>
+          <li><strong>Weekly performance email</strong> — passive reinforcement that spend was working, even without logging in</li>
+        </ul>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Dashboard — Phase 2 with Yesterday's Highlights</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Sprig survey data / seller feedback signals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 5: SCALING CONVERSION ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">05</div>
+      <div class="section-kicker">Scaling Conversion</div>
+      <h2 class="section-title">The experiments that moved the needle</h2>
+
+      <p class="section-body">
+        Once the foundation was solid, the work shifted to continuous optimization. Each test had a hypothesis grounded in research. I led design across all of them, guided PM on UX strategy, and shaped follow-up tests based on results — moving from executing flows to driving the question of <strong>what to test next.</strong>
+      </p>
+
+      <!-- LIFT TABLE -->
+      <div class="lift-grid">
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Payment method expansion — PayPal &amp; Venmo</div>
+            <div class="lift-context">Casual sellers don't trust credit cards on new products</div>
+          </div>
+          <span class="lift-badge">+22% free trial starts</span>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Pre-listing Boost entry point</div>
+            <div class="lift-context">Sellers are most motivated right after creating a listing</div>
+          </div>
+          <span class="lift-badge">+~5% free trial starts</span>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">iOS payment redirect to mWeb</div>
+            <div class="lift-context">Apple's in-app payment wall was killing iOS conversion</div>
+          </div>
+          <span class="lift-badge">+~5% free trial starts</span>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Budget UI revamp with impressions data</div>
+            <div class="lift-context">Sellers couldn't intuit what their budget would actually get them</div>
+          </div>
+          <span class="lift-badge">Measurable lift</span>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Free trial for churned sellers</div>
+            <div class="lift-context">A second chance with no risk to re-engage lapsed users</div>
+          </div>
+          <span class="lift-badge">Measurable lift</span>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">One-time Boost A/B</div>
+            <div class="lift-context">Casual sellers want event-driven boosts, not ongoing campaigns</div>
+          </div>
+          <span class="lift-badge tbd">In test</span>
+        </div>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Budget UI — before</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Screen</span>
+          <span class="screen-title">Budget UI — after (impressions data)</span>
+        </div>
+      </div>
+
+      <div class="screen screen-md">
+        <span class="screen-tag">Screen</span>
+        <span class="screen-title">Pre-listing Boost entry point — contextual design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 6: MOBILE ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">06</div>
+      <div class="section-kicker">Mobile Expansion</div>
+      <h2 class="section-title">The conversion doubler — entry points</h2>
+
+      <p class="section-body">
+        After web stabilized, we expanded to iOS and Android. The biggest unlock wasn't the creation flow — it was <strong>entry points.</strong>
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        Sellers spent most of their time in two places: their own closet and the notifications tab. Promoted Closet was buried in My Poshmark. Moving it to where sellers actually live — a banner in My Closet — doubled conversion.
+      </p>
+
+      <div class="callout">
+        <p>The most impactful design work isn't always inside the feature — it's about how users discover it.</p>
+      </div>
+
+      <div class="screen screen-lg">
+        <span class="screen-tag">Screen</span>
+        <span class="screen-title">My Closet banner entry point — the conversion doubler</span>
+      </div>
+
+      <div class="screen-grid-3">
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">iOS</span>
+          <span class="screen-title">App onboarding</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">iOS</span>
+          <span class="screen-title">iOS payment redirect flow</span>
+        </div>
+        <div class="screen screen-sm" style="margin:0">
+          <span class="screen-tag">Android</span>
+          <span class="screen-title">App dashboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 7: JOURNEY MAP ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">07</div>
+      <div class="section-kicker">Research & Roadmap Influence</div>
+      <h2 class="section-title">Shaping the 2026 roadmap through synthesis</h2>
+
+      <p class="section-body">
+        After 3 years of survey data, interviews, and Sprig responses, the team was sitting on a mountain of insight but no synthesis. I built a <strong>comprehensive user journey map</strong> for Promoted Closet — mapping seller emotions, actions, friction points, and opportunities from awareness through cancellation.
+      </p>
+
+      <p class="section-body" style="margin-top:16px">
+        Then I ran cross-functional workshops using the map to align product, design, and engineering around long-term opportunities — onboarding new PMs, surfacing blind spots, and prioritizing what could actually move the needle.
+      </p>
+
+      <div class="insight-box">
+        <div class="insight-box-title">Research scale behind the synthesis</div>
+        <ul class="insight-list">
+          <li><strong>371 responses</strong> — Active Seller Survey</li>
+          <li><strong>501 responses</strong> — Reasons for cancelling</li>
+          <li><strong>227 + 120 responses</strong> — Reasons users don't start a campaign</li>
+          <li><strong>11 discovery interviews</strong> — initial concept validation</li>
+          <li>Continuous Sprig surveys embedded in-product throughout</li>
+        </ul>
+      </div>
+
+      <div class="screen screen-xl">
+        <span class="screen-tag">Artifact</span>
+        <span class="screen-title">User Journey Map — end-to-end seller experience</span>
+      </div>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Workshop</span>
+          <span class="screen-title">Cross-functional brainstorming session</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Research</span>
+          <span class="screen-title">Sprig survey data snapshots</span>
+        </div>
+      </div>
+
+      <p class="section-body" style="margin-top:32px">
+        The journey map directly contributed to the <strong>2026 1P monetization roadmap.</strong> This is when my role shifted from "designer who ships" to "designer who shapes strategy."
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 8: BUYER SIDE ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">08</div>
+      <div class="section-kicker">Buyer-Side Optimization</div>
+      <h2 class="section-title">"Promoted" → "Ad" — one word, measurable revenue</h2>
+
+      <p class="section-body">
+        Promoted Closet wasn't only a seller experience problem. On the buyer side, promoted listings were labeled "Promoted." In a design proposal backed by Sprig data, I argued that <strong>"Ad"</strong> was a clearer, more familiar label — borrowed from what buyers already expect across e-commerce.
+      </p>
+
+      <div class="screen-grid-2">
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">Before</span>
+          <span class="screen-title">Buyer view — "Promoted" label</span>
+        </div>
+        <div class="screen screen-md" style="margin:0">
+          <span class="screen-tag">After</span>
+          <span class="screen-title">Buyer view — "Ad" label</span>
+        </div>
+      </div>
+
+      <p class="section-body" style="margin-top:16px">
+        The result: significant CTR lift on promoted listings — more clicks, more billable events, more revenue. <strong>One word. Measurable business impact.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 9: IMPACT & REFLECTION ─── -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">09</div>
+      <div class="section-kicker">Impact & Reflection</div>
+      <h2 class="section-title">What growing into senior looked like</h2>
+
+      <p class="section-body">
+        Over 3.5 years, Promoted Closet evolved from a concept doc into a core monetization ecosystem — spanning web, iOS, Android, onboarding, reporting, growth surfaces, payments, and buyer experiences. I drove it as the sole monetization designer from zero-to-one through multiple growth phases.
+      </p>
+
+      <div class="learnings-grid">
+        <div class="learning-card">
+          <div class="num">01</div>
+          <div class="title">From executing flows to framing problems</div>
+          <div class="body">The pivot from Sponsored Listings to Promoted Closet — knowing when to abandon competitor-research precedent for user simplicity.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">02</div>
+          <div class="title">From taking research as input to running it</div>
+          <div class="body">Led Sprig surveys, moderated usability tests, synthesized hundreds of responses, and built the journey map that shaped the roadmap.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">03</div>
+          <div class="title">From receiving PM direction to guiding it</div>
+          <div class="body">Shaped what to test next, unblocked the Budget Transparency workstream by partnering with Data to decode backend logic into design direction.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">04</div>
+          <div class="title">From individual contributor to mentor</div>
+          <div class="body">Now coaching a junior designer on the same monetization team — on UI/UX fundamentals, product thinking, and how to navigate cross-functional work.</div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:40px">
+        <p>Simplicity is the hardest thing to design for — and it's worth fighting for. The CEO's reframe that our sellers are normal people, not advertisers, defined every decision I made for three years. It's still the lens I bring to every project.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="container">
+    <div class="thankyou">
+      <h2>Thank you for reading</h2>
+      <p>More case studies on the way.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="home.html" class="footer-back">Go back to works</a>
+    <span class="footer-credit">Divya Karunakaran · Sr. Product Designer</span>
+  </footer>
+
+</body>
+</html>

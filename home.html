@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divya Karunakaran – Sr. Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #ffffff;
+      --bg2:       #f5f5f5;
+      --bg3:       #eeeeee;
+      --border:    rgba(0,0,0,0.08);
+      --border-h:  rgba(0,0,0,0.16);
+      --text:      #111111;
+      --text-2:    #555555;
+      --text-3:    #999999;
+      --accent:    #023e8a;
+      --accent-l:  #1e60b8;
+      --r:         16px;
+      --r-sm:      10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 56px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 7px 14px;
+      border-radius: 50px;
+      border: 1px solid transparent;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      border-color: var(--border-h);
+      background: rgba(0,0,0,0.04);
+    }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 168px 32px 96px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #16a34a;
+      background: rgba(22,163,74,0.08);
+      border: 1px solid rgba(22,163,74,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      margin-bottom: 28px;
+    }
+    .avail-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #16a34a;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 24px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .hero-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+    .hero-line-1 {
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 400;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .hero-line-2 {
+      font-size: clamp(52px, 8vw, 104px);
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 1.0;
+    }
+
+    .hero-bio {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-2);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .hero-bio strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      padding: 12px 24px;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-l);
+      border-color: var(--accent-l);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      border: 1px solid var(--border-h);
+      border-radius: 50px;
+      padding: 12px 24px;
+      transition: color 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(0,0,0,0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTION COMMON ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    section { padding: 72px 0; }
+
+    /* ── WORKS ── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .work-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+      text-decoration: none;
+    }
+    .work-card:hover {
+      border-color: var(--border-h);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-thumb-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work-thumb-bg-1 { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); }
+    .work-thumb-bg-2 { background: linear-gradient(135deg, #1a0533 0%, #2d1b4e 50%, #3d2b6b 100%); }
+    .work-thumb-bg-3 { background: linear-gradient(135deg, #0d2137 0%, #1a3a52 50%, #1e5a7a 100%); }
+
+    .work-thumb-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      position: relative;
+    }
+
+    .work-thumb-decoration { position: absolute; inset: 0; }
+    .deco-circle { position: absolute; border-radius: 50%; }
+    .deco-circle-1 { width: 80px; height: 80px; background: rgba(2,62,138,0.18); top: 20%; left: 20%; }
+    .deco-circle-2 { width: 120px; height: 120px; background: rgba(30,96,184,0.1); bottom: 10%; right: 10%; }
+
+    .work-body {
+      padding: 22px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--bg);
+    }
+
+    .work-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .work-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .work-arrow {
+      margin-top: auto;
+      padding-top: 12px;
+      font-size: 13px;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.18s, gap 0.18s;
+    }
+    .work-card:hover .work-arrow { color: var(--accent); gap: 8px; }
+
+    /* ── ABOUT ── */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .about-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, #dbe7f5 0%, #b6cce6 50%, #7fa3cf 100%);
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-avatar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 35%, rgba(2,62,138,0.15) 0%, transparent 60%);
+    }
+    .about-avatar-initials {
+      font-size: 72px;
+      font-weight: 800;
+      letter-spacing: -4px;
+      color: rgba(180,60,30,0.2);
+      position: relative;
+    }
+
+    .about-content { display: flex; flex-direction: column; gap: 20px; }
+
+    .about-text { font-size: 16px; color: var(--text-2); line-height: 1.8; }
+
+    .about-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 6px 14px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .tcard {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color 0.22s, box-shadow 0.22s;
+    }
+    .tcard:hover {
+      border-color: var(--border-h);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+
+    .tcard-quote {
+      font-size: 32px;
+      line-height: 1;
+      color: var(--accent);
+      font-family: Georgia, serif;
+      opacity: 0.5;
+    }
+
+    .tcard-text {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.75;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .tcard-author { display: flex; align-items: center; gap: 12px; }
+
+    .tcard-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: #dbe7f5;
+      border: 1px solid rgba(2,62,138,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .tcard-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .tcard-role { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+    .tcard-highlights { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0; }
+    .tcard-chip {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(2,62,138,0.07);
+      border: 1px solid rgba(2,62,138,0.15);
+      border-radius: 50px;
+      padding: 4px 10px;
+      letter-spacing: 0.2px;
+    }
+
+    /* ── BEHANCE BENTO ── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px 240px;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .bento-card {
+      position: relative;
+      border-radius: var(--r);
+      overflow: hidden;
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .bento-card:hover .bento-img { transform: scale(1.04); }
+    .bento-card:hover .bento-label { opacity: 1; }
+
+    .bento-large {
+      grid-column: span 2;
+    }
+
+    .bento-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    /* Center the FitnessPro mobile mockup which sits on the right of the image */
+    .bento-fitness .bento-img {
+      object-position: 78% center;
+    }
+
+    .bento-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .bento-large { grid-column: span 2; }
+    }
+
+    /* ── FOOTER ── */
+    .footer-section {
+      border-top: 1px solid var(--border);
+      padding: 64px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .footer-heading {
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .footer-sub { font-size: 16px; color: var(--text-2); max-width: 400px; line-height: 1.7; }
+
+    .footer-links { display: flex; flex-direction: column; gap: 10px; min-width: 180px; }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 18px;
+      transition: color 0.18s, border-color 0.18s, transform 0.18s;
+      width: fit-content;
+    }
+    .footer-link:hover {
+      color: var(--text);
+      border-color: var(--border-h);
+      transform: translateX(4px);
+    }
+    .footer-link-icon { font-size: 15px; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-3); }
+    .footer-made-with { font-size: 12px; color: var(--text-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 128px 24px 72px; }
+      .works-grid { grid-template-columns: 1fr; }
+      .about-layout { grid-template-columns: 1fr; }
+      .about-avatar { max-width: 260px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .bento-large { grid-column: span 2; }
+      .footer-top { flex-direction: column; }
+    }
+
+    @media (max-width: 540px) {
+      .works-grid { gap: 12px; }
+      .hero-line-1 { letter-spacing: -1px; }
+      .hero-line-2 { letter-spacing: -2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Divya Karunakaran</span>
+    <div class="nav-links">
+      <a href="#works" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="https://www.linkedin.com/in/divyak71997/" target="_blank" class="nav-link">LinkedIn</a>
+      <a href="#" class="nav-link">Resume</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-heading">
+      <span class="hero-line-1">Hello! I'm Divya,</span>
+      <span class="hero-line-2">A product designer</span>
+    </h1>
+    <p class="hero-bio">
+      A Product Designer with <strong>7+ years of experience</strong> creating scalable digital experiences across consumer and enterprise products. Currently driving monetization &amp; growth <strong>@Poshmark</strong>, previously <strong>@FULL Creative</strong>.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">My Resume ↗</a>
+      <a href="#works" class="btn-ghost">View Works</a>
+    </div>
+  </div>
+
+  <!-- SELECTED WORKS -->
+  <div class="wrap">
+    <section id="works">
+      <div class="section-label">Selected Works</div>
+      <h2 class="section-title">Things I've crafted</h2>
+
+      <div class="works-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+        <!-- Promoted Closet -->
+        <a href="promoted-closet.html" class="work-card">
+          <div class="work-thumb">
+            <div class="work-thumb-bg" style="background: linear-gradient(135deg, #04091a 0%, #0a1f47 45%, #023e8a 100%);">
+              <div class="work-thumb-decoration">
+                <div class="deco-circle" style="width:100px;height:100px;background:rgba(2,62,138,0.2);top:15%;left:15%;position:absolute;border-radius:50%;"></div>
+                <div class="deco-circle" style="width:160px;height:160px;background:rgba(30,96,184,0.1);bottom:5%;right:5%;position:absolute;border-radius:50%;"></div>
+              </div>
+              <span class="work-thumb-label" style="position:relative">Promoted Closet</span>
+            </div>
+          </div>
+          <div class="work-body">
+            <span class="work-tag" style="color:#023e8a">Poshmark</span>
+            <div class="work-title">Building Poshmark's first seller advertising platform — from concept to scaled monetization</div>
+            <div class="work-arrow">View case study →</div>
+          </div>
+        </a>
+
+        <!-- AdaptiveU -->
+        <a href="adaptiveu.html" class="work-card">
+          <div class="work-thumb">
+            <div class="work-thumb-bg" style="background: linear-gradient(135deg, #05091a 0%, #0d1a4a 45%, #1a2d7a 100%);">
+              <div class="work-thumb-decoration">
+                <div class="deco-circle" style="width:100px;height:100px;background:rgba(79,110,247,0.22);top:15%;left:15%;position:absolute;border-radius:50%;"></div>
+                <div class="deco-circle" style="width:160px;height:160px;background:rgba(123,148,249,0.1);bottom:5%;right:5%;position:absolute;border-radius:50%;"></div>
+              </div>
+              <span class="work-thumb-label" style="position:relative">AdaptiveU LMS</span>
+            </div>
+          </div>
+          <div class="work-body">
+            <span class="work-tag" style="color:#4f6ef7">Full Creative</span>
+            <div class="work-title">Redesigning course creation for AdaptiveU LMS — driving 51% completion rates</div>
+            <div class="work-arrow">View case study →</div>
+          </div>
+        </a>
+
+        <!-- Poshmark Onboarding -->
+        <a href="onboarding-redesign.html" class="work-card">
+          <div class="work-thumb">
+            <div class="work-thumb-bg" style="background: linear-gradient(135deg, #0d001a 0%, #2d0545 45%, #4a0d72 100%);">
+              <div class="work-thumb-decoration">
+                <div class="deco-circle" style="width:100px;height:100px;background:rgba(160,80,240,0.22);top:15%;left:15%;position:absolute;border-radius:50%;"></div>
+                <div class="deco-circle" style="width:160px;height:160px;background:rgba(180,100,255,0.1);bottom:5%;right:5%;position:absolute;border-radius:50%;"></div>
+              </div>
+              <span class="work-thumb-label" style="position:relative">Onboarding Redesign</span>
+            </div>
+          </div>
+          <div class="work-body">
+            <span class="work-tag" style="color:#a050f0">Poshmark</span>
+            <div class="work-title">Redesigning Poshmark's signup & onboarding funnel — personalized preference collection at scale</div>
+            <div class="work-arrow">View case study →</div>
+          </div>
+        </a>
+
+        <!-- Bundles Redesign -->
+        <a href="#" class="work-card">
+          <div class="work-thumb">
+            <div class="work-thumb-bg" style="background: linear-gradient(135deg, #001a0f 0%, #014a25 45%, #026b38 100%);">
+              <div class="work-thumb-decoration">
+                <div class="deco-circle" style="width:100px;height:100px;background:rgba(0,180,90,0.22);top:15%;left:15%;position:absolute;border-radius:50%;"></div>
+                <div class="deco-circle" style="width:160px;height:160px;background:rgba(0,210,100,0.1);bottom:5%;right:5%;position:absolute;border-radius:50%;"></div>
+              </div>
+              <span class="work-thumb-label" style="position:relative">Bundles Redesign</span>
+            </div>
+          </div>
+          <div class="work-body">
+            <span class="work-tag" style="color:#00a855">Poshmark</span>
+            <div class="work-title">Reimagining Poshmark's Bundles — improving discount visibility, pricing transparency & bundle management</div>
+            <div class="work-arrow">Coming soon</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About me</div>
+      <h2 class="section-title">The person behind the pixels</h2>
+
+      <div class="about-layout">
+        <div class="about-avatar">
+          <span class="about-avatar-initials">DK</span>
+        </div>
+        <div class="about-content">
+          <p class="about-text">
+            I'm a Senior Product Designer with <strong style="color:var(--text)">7+ years of experience</strong> creating scalable digital experiences across consumer and enterprise products. I specialize in simplifying complex workflows through intuitive, user-centered design — balancing business strategy with technical feasibility.
+          </p>
+          <p class="about-text">
+            I love building 0→1 products and driving measurable outcomes. Empathy is my mantra, and I strongly believe the best ideas come from diversity of thought.
+          </p>
+          <p class="about-text">
+            On a personal front, I enjoy spending my free time swimming, and when it comes to entertainment, I'm an avid Marvel fan — with Spider-Man as my ultimate superhero.
+          </p>
+          <div class="about-pills">
+            <span class="pill">Product Design</span>
+            <span class="pill">Interaction Design</span>
+            <span class="pill">Design Systems</span>
+            <span class="pill">User Research</span>
+            <span class="pill">Prototyping</span>
+            <span class="pill">Information Architecture</span>
+            <span class="pill">Usability Testing</span>
+            <span class="pill">Motion Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="section-label">Kind words</div>
+      <h2 class="section-title">What colleagues say</h2>
+
+      <div class="testimonials-grid" style="grid-template-columns: 1fr 1fr;">
+
+        <!-- Bhushan Jain -->
+        <div class="tcard">
+          <div class="tcard-quote">"</div>
+          <p class="tcard-text">A true all-rounder — from defining user journeys and conducting user research, to UX writing and creating high-quality visuals, she consistently delivered with excellence. She built our monetization product from the ground up, single-handedly driving it from concept to completion.</p>
+          <div class="tcard-author">
+            <div class="tcard-avatar">BJ</div>
+            <div>
+              <div class="tcard-name">Bhushan Jain</div>
+              <div class="tcard-role">Director, Product Design · Poshmark</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- William Hemond -->
+        <div class="tcard">
+          <div class="tcard-quote">"</div>
+          <p class="tcard-text">Her design leadership directly enabled a 5× increase in daily acquisition volume, increased seller retention through reporting dashboards, and a 20% CTR lift across buyer-side ad placements. She developed the confidence to champion the seller's voice — any team would be fortunate to have her.</p>
+          <div class="tcard-author">
+            <div class="tcard-avatar">WH</div>
+            <div>
+              <div class="tcard-name">William Hemond</div>
+              <div class="tcard-role">GM Monetization & Ad Tech · Poshmark</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BEHANCE BENTO -->
+    <section id="behance">
+      <div class="section-label">UI Explorations</div>
+      <h2 class="section-title">More work on Behance</h2>
+
+      <div class="bento-grid">
+
+        <!-- Row 1: Course Builder (span 2) + 1M Trees -->
+        <a href="https://www.behance.net/gallery/104213275/Course-builder" target="_blank" class="bento-card bento-large">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/955927104213275.Y3JvcCwzODQwLDMwMDMsMCwyMTg.jpg" alt="Course builder" class="bento-img" />
+          <div class="bento-label">Course Builder</div>
+        </a>
+
+        <a href="https://www.behance.net/gallery/249621463/1M-Trees-2021-Infographic-Visual-Storytelling" target="_blank" class="bento-card">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/7e5b08249621463.Y3JvcCwyNzI0LDIxMzEsMTA3Miww.png" alt="1M Trees Infographic" class="bento-img" />
+          <div class="bento-label">1M Trees Infographic</div>
+        </a>
+
+        <!-- Row 2: Blog Design + Sign-up Exploration (span 2) -->
+        <a href="https://www.behance.net/gallery/104213359/Blog-Design" target="_blank" class="bento-card">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/f7bb99104213359.Y3JvcCwyNDEyLDE4ODYsMCwzNQ.jpg" alt="Blog Design" class="bento-img" />
+          <div class="bento-label">Blog Design</div>
+        </a>
+
+        <a href="https://www.behance.net/gallery/104213001/Sign-up-exploration" target="_blank" class="bento-card bento-large">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/1e3a18104213001.Y3JvcCwxNTU0LDEyMTYsNzgxLDA.jpg" alt="Sign up exploration" class="bento-img" />
+          <div class="bento-label">Sign-up Exploration</div>
+        </a>
+
+        <!-- Row 3: Quiz + Fitness + Instagram -->
+        <a href="https://www.behance.net/gallery/104213091/Quiz-component-for-course-builder" target="_blank" class="bento-card">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/dc8162104213091.Y3JvcCwzMDAwLDIzNDYsMCww.jpg" alt="Quiz component for course builder" class="bento-img" />
+          <div class="bento-label">Quiz Component</div>
+        </a>
+
+        <a href="https://www.behance.net/gallery/104213203/Fitness-App-design-concept" target="_blank" class="bento-card bento-fitness">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/affcc9104213203.Y3JvcCwyMjQyLDE3NTMsMTExLDc3.jpg" alt="Fitness App design concept" class="bento-img" />
+          <div class="bento-label">Fitness App Concept</div>
+        </a>
+
+        <a href="https://www.behance.net/gallery/140941595/Instagram-Checkout-Flow-for-Indian-Market" target="_blank" class="bento-card">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/808/666c94140941595.Y3JvcCwxNjE2LDEyNjQsMCww.jpg" alt="Instagram Checkout Flow" class="bento-img" />
+          <div class="bento-label">Instagram Checkout Flow</div>
+        </a>
+
+      </div>
+
+      <div style="text-align:center; margin-top:32px">
+        <a href="https://www.behance.net/divyakaruna" target="_blank" class="btn-ghost">View all on Behance ↗</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-section">
+    <div class="footer-top">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="footer-heading">Let's work<br>together.</h2>
+        <p class="footer-sub">Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://instagram.com" target="_blank" class="footer-link">
+          <span class="footer-link-icon">📷</span> Instagram
+        </a>
+        <a href="mailto:divya@example.com" class="footer-link">
+          <span class="footer-link-icon">✉️</span> Email
+        </a>
+        <a href="https://dribbble.com" target="_blank" class="footer-link">
+          <span class="footer-link-icon">🏀</span> Dribbble
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Divya Karunakaran · Sr. Product Designer</span>
+      <span class="footer-made-with">Designed with care ✦</span>
+    </div>
+  </div>
+
+</body>
+</html>

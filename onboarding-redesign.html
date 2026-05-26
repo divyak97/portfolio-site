@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Redesign — Divya Karunakaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #ffffff;
+      --bg2:        #f5f5f5;
+      --bg3:        #eeeeee;
+      --border:     rgba(0,0,0,0.08);
+      --border-h:   rgba(0,0,0,0.15);
+      --text:       #111111;
+      --text-2:     #555555;
+      --text-3:     #999999;
+      --accent:     #5b1fa8;
+      --accent-l:   #8b4fd8;
+      --radius:     16px;
+      --radius-sm:  10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+    }
+    .nav-back:hover { color: var(--text); border-color: var(--border-h); }
+    .nav-back::before { content: "←"; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 148px 24px 64px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 20px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      gap: 0;
+      margin-bottom: 56px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .meta-item {
+      padding: 20px 28px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── HERO COVER ── */
+    .hero-cover {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 80px;
+      background: linear-gradient(135deg, #0d001a 0%, #2d0545 50%, #4a0d72 100%);
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-cover-deco {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .hero-cover-deco span {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .hero-cover-deco span:nth-child(1) {
+      width: 320px; height: 320px;
+      background: rgba(160,80,240,0.18);
+      top: -60px; left: -60px;
+    }
+    .hero-cover-deco span:nth-child(2) {
+      width: 220px; height: 220px;
+      background: rgba(200,130,255,0.12);
+      bottom: -40px; right: 10%;
+    }
+    .hero-cover-deco span:nth-child(3) {
+      width: 120px; height: 120px;
+      background: rgba(180,80,255,0.2);
+      top: 40%; right: 20%;
+    }
+
+    .hero-cover-label {
+      position: relative;
+      text-align: center;
+    }
+    .hero-cover-label span {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+    }
+    .hero-cover-label h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── METRICS ── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+
+    .metric-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+    }
+
+    .metric-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric-num .accent { color: var(--accent); }
+
+    .metric-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .section-body + .section-body { margin-top: 16px; }
+    .section-body strong { color: var(--text); font-weight: 600; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: linear-gradient(135deg, rgba(91,31,168,0.05) 0%, rgba(139,79,216,0.03) 100%);
+      border: 1px solid rgba(91,31,168,0.15);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout p {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .callout-source {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ── INSIGHT BOX ── */
+    .insight-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 32px 0;
+    }
+
+    .insight-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+
+    .insight-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .insight-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .insight-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .insight-list li strong { color: var(--text); font-weight: 600; }
+
+    /* ── SCREEN PLACEHOLDER ── */
+    .screen {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px dashed rgba(0,0,0,0.12);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 32px 0;
+    }
+
+    .screen-sm  { height: 200px; }
+    .screen-md  { height: 320px; }
+    .screen-lg  { height: 440px; }
+    .screen-xl  { height: 520px; }
+
+    .screen-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(91,31,168,0.07);
+      border: 1px solid rgba(91,31,168,0.15);
+      border-radius: 50px;
+      padding: 4px 12px;
+    }
+
+    .screen-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-3);
+    }
+
+    .screen-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .screen-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    /* ── COMPARISON ── */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .comparison-side {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .comparison-side.after {
+      background: linear-gradient(135deg, rgba(91,31,168,0.05) 0%, rgba(139,79,216,0.03) 100%);
+      border-color: rgba(91,31,168,0.2);
+    }
+
+    .comparison-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+
+    .comparison-side.after .comparison-label { color: var(--accent); }
+
+    .comparison-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .comparison-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comparison-items li {
+      font-size: 14px;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .comparison-items li .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--text-3);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .comparison-side.after .comparison-items li .dot { background: var(--accent); }
+
+    /* ── LIFT TABLE ── */
+    .lift-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 32px 0;
+    }
+
+    .lift-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 24px;
+      transition: border-color 0.2s;
+    }
+    .lift-row:hover { border-color: var(--border-h); }
+
+    .lift-desc { font-size: 15px; font-weight: 500; color: var(--text); }
+    .lift-context { font-size: 13px; color: var(--text-2); margin-top: 3px; }
+
+    .lift-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(91,31,168,0.08);
+      border: 1px solid rgba(91,31,168,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      white-space: nowrap;
+    }
+
+    .lift-badge.tbd {
+      color: var(--text-3);
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    /* ── STAT GRID ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      background: var(--bg2);
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    .stat-label strong { color: var(--text); }
+
+    /* ── FLOW STEPS ── */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .flow-step:last-child { border-bottom: none; }
+
+    .flow-step-num {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 0 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: rgba(91,31,168,0.04);
+      border-right: 1px solid var(--border);
+    }
+
+    .flow-step-body {
+      padding: 20px 24px;
+    }
+
+    .flow-step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .flow-step-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ── COMPETITOR GRID ── */
+    .competitor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .competitor-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      background: var(--bg2);
+    }
+
+    .competitor-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .competitor-tag {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .competitor-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .competitor-items li {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .competitor-items li .icon {
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── LEARNINGS ── */
+    .learnings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .learning-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .learning-card:hover { border-color: var(--border-h); }
+
+    .learning-card .num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(91,31,168,0.15);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .learning-card .title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .learning-card .body {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* ── THANK YOU ── */
+    .thankyou {
+      text-align: center;
+      padding: 80px 24px 96px;
+      border-top: 1px solid var(--border);
+    }
+
+    .thankyou h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .thankyou p { font-size: 16px; color: var(--text-2); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-back:hover { color: var(--text); border-color: var(--border-h); }
+    .footer-back::before { content: "←"; }
+
+    .footer-credit { font-size: 13px; color: var(--text-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 56px; }
+      .meta-row { grid-template-columns: 1fr 1fr; }
+      .meta-item { border-bottom: 1px solid var(--border); }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .comparison { grid-template-columns: 1fr; }
+      .screen-grid-2 { grid-template-columns: 1fr; }
+      .screen-grid-3 { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .competitor-grid { grid-template-columns: 1fr; }
+      .learnings-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Divya Karunakaran</span>
+    <a href="index.html" class="nav-back">Back to work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Poshmark · Growth & Onboarding</div>
+    <h1 class="hero-title">Next-Gen <span style="color:var(--accent)">Onboarding</span> &amp; Personalization</h1>
+    <p class="hero-subtitle">
+      Leading the end-to-end redesign of Poshmark's signup and onboarding funnel — introducing personalized preference collection to surface better recommendations and grow first-party user signals, without sacrificing signup conversion.
+    </p>
+
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Lead Product Designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-value">2024 – 2025</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">iOS · Android · Web</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">0→1 End-to-End</div>
+      </div>
+    </div>
+
+    <!-- HERO COVER -->
+    <div class="hero-cover">
+      <div class="hero-cover-deco">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="hero-cover-label">
+        <span>Poshmark · Onboarding Redesign</span>
+        <h2>Sign Up → First Purchase</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACT METRICS -->
+  <div class="container">
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-num">&gt;<span class="accent">50</span>%</div>
+        <div class="metric-desc">Signal fill rate target — up from ~12% baseline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">65</span>%</div>
+        <div class="metric-desc">New users who completed brand preferences in A/B test</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">0</span>↓</div>
+        <div class="metric-desc">Drop in signup conversion — maintained throughout redesign</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num"><span class="accent">5</span> steps</div>
+        <div class="metric-desc">New onboarding stages replacing one dense form screen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 CONTEXT -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">01</div>
+      <div class="section-kicker">Context</div>
+      <h2 class="section-title">Poshmark's first major redesign in 15 years</h2>
+      <p class="section-body">
+        In 2024, Poshmark — one of the largest social commerce platforms in North America — embarked on its first major app redesign since launching in 2011. The platform had grown to over 80 million registered users, but its onboarding experience had barely changed. New users signed up through a generic multi-field form, skipped directly to a feed with zero personalization, and were immediately overwhelmed by millions of listings with no relevance to their tastes.
+      </p>
+      <p class="section-body" style="margin-top:16px;">
+        My role was to lead the design of the new onboarding and signup funnel from the ground up — an experience that would touch every new user across iOS, Android, and Web. The goal: <strong>collect meaningful first-party preference signals without adding friction to signup.</strong>
+      </p>
+
+      <div class="callout">
+        <p>"The old onboarding gave us almost no signal about who the user was. Every new user looked identical in our data the moment they hit the feed. We were recommending everyone the same listings."</p>
+        <div class="callout-source">— Internal data review, Poshmark Growth Team</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 PROBLEM -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">02</div>
+      <div class="section-kicker">Problem Statement</div>
+      <h2 class="section-title">Zero personalization at the most critical moment</h2>
+      <p class="section-body">
+        Poshmark's original onboarding was a linear sign-up form — first/last name, email, username, password, zip code, country, and an optional referral code. That was it. No style preferences. No brand affinity. No size data. After completing the form, users landed on a generic feed that felt as impersonal as walking into an infinite, unsorted thrift store.
+      </p>
+
+      <div class="comparison">
+        <div class="comparison-side">
+          <div class="comparison-label">Before — The problem</div>
+          <div class="comparison-title">A form, not an experience</div>
+          <ul class="comparison-items">
+            <li><span class="dot"></span>7-field registration form collected only account data, zero preference data</li>
+            <li><span class="dot"></span>No value proposition shown — app opened directly to login</li>
+            <li><span class="dot"></span>Outdated SSO options presented without clear differentiation</li>
+            <li><span class="dot"></span>Password visible by default on SSO screens, security inconsistency</li>
+            <li><span class="dot"></span>Post-signup feed was identical for all new users</li>
+            <li><span class="dot"></span>Signal fill rate for recommendations: ~12%</li>
+            <li><span class="dot"></span>94% of users skipped the community connection step entirely</li>
+          </ul>
+        </div>
+        <div class="comparison-side after">
+          <div class="comparison-label">After — The redesign</div>
+          <div class="comparison-title">A personalized welcome</div>
+          <ul class="comparison-items">
+            <li><span class="dot"></span>Landing screen communicates value prop before asking for anything</li>
+            <li><span class="dot"></span>Streamlined 3-field signup — name and email only, then separate profile step</li>
+            <li><span class="dot"></span>5-stage on-ramp: Department → Sizes → Aesthetics → Brands → Demographics</li>
+            <li><span class="dot"></span>Cascading selections — department choice shapes everything downstream</li>
+            <li><span class="dot"></span>Feed populated with relevant listings on first load</li>
+            <li><span class="dot"></span>Target signal fill rate: &gt;50% of new users</li>
+            <li><span class="dot"></span>Skip CTAs on every step — never block, always respect user choice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 RESEARCH -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">03</div>
+      <div class="section-kicker">Research & Discovery</div>
+      <h2 class="section-title">What the data told us about new users</h2>
+      <p class="section-body">
+        Before designing a single screen, we dug into existing signup and onboarding analytics, session recordings, and the post-onboarding behavior patterns that Roger's team had been tracking. The picture that emerged was clear: new users were arriving with strong intent but leaving without any signal.
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">37%</div>
+          <div class="stat-label">Sign up via <strong>Apple</strong> — our largest SSO channel, followed by Google (30%) and email (27%)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">94%</div>
+          <div class="stat-label">New users <strong>skipped</strong> the community connect step — phone contacts, Facebook, Twitter all ignored</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">65%</div>
+          <div class="stat-label">Of new users <strong>followed at least one brand</strong> when given the option in early experiments</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">44%</div>
+          <div class="stat-label">Followed a brand <strong>prominently featured</strong> in Posh Shows — aesthetic anchoring is powerful</div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-box-title">Post-onboarding behavior (top actions in first session)</div>
+        <ul class="insight-list">
+          <li><strong>25% performed a search</strong> — users actively looked for something specific, indicating intent the feed wasn't serving</li>
+          <li><strong>25% interacted with a feed unit</strong> — but with a non-personalized feed, this was driven by recency not relevance</li>
+          <li><strong>14% went straight to a listing detail</strong> via deeplink — deeplink handling was broken for new users during login</li>
+          <li><strong>4% went straight to sell</strong> — a distinct seller persona we needed to account for in onboarding design</li>
+        </ul>
+      </div>
+
+      <p class="section-body">
+        The data revealed three distinct user intents at signup: <strong>shoppers</strong> who wanted curated discovery, <strong>sellers</strong> who came to list, and <strong>browsers</strong> who were exploring without a specific goal. Our onboarding needed to serve all three — without interrogating users with a long questionnaire they'd abandon halfway through.
+      </p>
+
+      <div class="callout">
+        <p>"The community connect step had a 6% completion rate. We spent engineering time building it, users spent 0 seconds engaging with it. We knew what had to go."</p>
+        <div class="callout-source">— Onboarding analytics review</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 COMPETITOR ANALYSIS -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">04</div>
+      <div class="section-kicker">Competitor Analysis</div>
+      <h2 class="section-title">How the best onboarding flows collect signal without friction</h2>
+      <p class="section-body">
+        We audited onboarding across resale, fashion, and social commerce platforms to understand where the industry was setting the bar — and where Poshmark had an opportunity to leapfrog.
+      </p>
+
+      <div class="competitor-grid">
+        <div class="competitor-card">
+          <div class="competitor-name">Depop</div>
+          <div class="competitor-tag">Social Resale · Direct Competitor</div>
+          <ul class="competitor-items">
+            <li><span class="icon">✓</span>Style-first onboarding — asks aesthetic preferences before account creation</li>
+            <li><span class="icon">✓</span>Visual photo grid for style selection, feels like browsing not form-filling</li>
+            <li><span class="icon">✗</span>Limited to clothing, no cross-category personalization</li>
+            <li><span class="icon">✗</span>No size data collected — recommendations still size-agnostic</li>
+          </ul>
+        </div>
+        <div class="competitor-card">
+          <div class="competitor-name">Pinterest</div>
+          <div class="competitor-tag">Visual Discovery · Adjacent Inspiration</div>
+          <ul class="competitor-items">
+            <li><span class="icon">✓</span>Topic selection at onboarding is the gold standard — visual, fast, multi-select</li>
+            <li><span class="icon">✓</span>Clear value exchange: "pick your interests → we show you relevant content"</li>
+            <li><span class="icon">✓</span>Minimum viable input, maximum personalization payoff</li>
+            <li><span class="icon">✗</span>Doesn't need to handle transactional complexity (size, fit, SKU)</li>
+          </ul>
+        </div>
+        <div class="competitor-card">
+          <div class="competitor-name">Farfetch</div>
+          <div class="competitor-tag">Luxury Resale · Premium Positioning</div>
+          <ul class="competitor-items">
+            <li><span class="icon">✓</span>Department selection upfront shapes entire shopping experience</li>
+            <li><span class="icon">✓</span>Size preferences collected early, used across all product pages</li>
+            <li><span class="icon">✗</span>Onboarding feels like an e-commerce account setup, not personalization</li>
+            <li><span class="icon">✗</span>Single-gender assumption reduces inclusivity</li>
+          </ul>
+        </div>
+        <div class="competitor-card">
+          <div class="competitor-name">The RealReal</div>
+          <div class="competitor-tag">Luxury Consignment · Resale Comp</div>
+          <ul class="competitor-items">
+            <li><span class="icon">✓</span>Collects brand affinity during onboarding to curate new arrivals alerts</li>
+            <li><span class="icon">✓</span>Strong value prop: "know when your brands drop" creates immediate utility</li>
+            <li><span class="icon">✗</span>Onboarding is gated — must complete before seeing any inventory</li>
+            <li><span class="icon">✗</span>No aesthetic clustering — pure brand list is overwhelming at scale</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-box-title">Key synthesis from competitor audit</div>
+        <ul class="insight-list">
+          <li><strong>Progressive disclosure works</strong> — the best flows collect small amounts of signal at each step, not everything at once</li>
+          <li><strong>Visual selection beats dropdowns</strong> — photo grids and aesthetic tiles drive higher completion than form fields</li>
+          <li><strong>Skippable &gt; mandatory</strong> — every competitor who forced completion saw higher drop-off at the gate</li>
+          <li><strong>Aesthetic → Brand is a natural cascade</strong> — showing brands within an aesthetic context dramatically improves selection quality</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 DESIGN APPROACH -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">05</div>
+      <div class="section-kicker">Design Approach</div>
+      <h2 class="section-title">Building a preference funnel that cascades intelligently</h2>
+      <p class="section-body">
+        The core design challenge was this: Poshmark's catalog spans Women's, Men's, Kids, Home, and Electronics — each with their own sizing logic, brand universe, and aesthetic vocabulary. A single flat preference screen would be an overwhelming and irrelevant experience for most users. We needed a cascading architecture where each choice meaningfully shaped what came next.
+      </p>
+
+      <div class="callout">
+        <p>"Every downstream selection must be a direct consequence of what the user told us earlier. If they go back and change their department, their aesthetics and brands should reset — we can't let stale choices haunt their recommendations."</p>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">01</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Landing Screen — Value Before Ask</div>
+            <div class="flow-step-desc">The app opens to a full-bleed visual communicating "Real finds, real inspiration, everyday" before asking for any credentials. SSO options (Apple, Google, Facebook, Email) are presented clearly. The old experience opened directly to a login form — no context, no reason to sign up.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">02</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Signup — 3 Fields, Not 7</div>
+            <div class="flow-step-desc">We split the old registration screen into two steps: (1) First name, last name, email. (2) Username (auto-generated from name), password, and optional zip/country/gender. This reduces the cognitive load of the first screen while still collecting the required data. SSO flows pre-fill name and skip directly to step 2.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">03</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Department — The Personalization Anchor</div>
+            <div class="flow-step-desc">Users select what they shop for: Women's, Men's, Kids, Home, Electronics, Pets. This single choice is the root of the entire preference cascade. Selecting Women's Wear surfaces women's size categories (Dresses, Pants, Shoes across Standard, Juniors, Petite, and Maternity ranges) and women's aesthetic vocabulary. Selecting Men's unlocks entirely different size buckets and aesthetics. Multi-department selection is supported — the system unions all relevant content downstream.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">04</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Sizes — Action Sheet, Not a Form</div>
+            <div class="flow-step-desc">Instead of dropdown menus, sizes appear in a bottom action sheet per department — a scannable grid of size chips that feel closer to shopping than form-filling. Users can select up to 4 sizes across categories. Tapping "Add Later" closes the sheet without saving, keeping the department selected. This solves the old UX problem where zip code, dress size, and shoe size were crammed into a single overwhelming screen.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">05</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Aesthetics — Vibes, Not just Brands</div>
+            <div class="flow-step-desc">Before surfacing 15,000+ brands, we introduce aesthetic buckets: Bohemian, Minimalist, Streetwear, Pilates Princess, Cabincore, Maximalist, Preppy, and more — each mapped to 5 anchor brands. Users pick the vibes that resonate with them. This does two things: it dramatically narrows the brand universe they see next, and it creates a rich style signal for recommendations beyond just "bought Nike once."</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">06</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Brands — Curated, Then Open Search</div>
+            <div class="flow-step-desc">The brand screen shows three tiers: brands surfaced from aesthetic selections (most relevant), then popular brands (social proof), and a full search bar for the remaining 15k+ catalog. Brands are saved on tap — no "Continue" required for partial engagement. If users selected zero aesthetics, popular brands show directly. Skipping brands does not clear existing selections, respecting any choices already made.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">07</div>
+          <div class="flow-step-body">
+            <div class="flow-step-title">Demographics — Era + Lifestyle</div>
+            <div class="flow-step-desc">The final on-ramp screen asks two lightweight questions: age range (18–27, 28–43, 44+) and occupation type (10 categories from Creative Professional to Student). The copy is thoughtfully framed — "Style evolves with you. Pick your era and we'll match the vibe." — rather than feeling like a census form. Both questions are optional, skippable, and FS-controlled for future iteration.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 KEY DESIGN CHALLENGES -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">06</div>
+      <div class="section-kicker">Key Design Challenges</div>
+      <h2 class="section-title">The hard problems we had to solve</h2>
+
+      <div class="section-title" style="font-size:18px; margin-top:32px; margin-bottom:12px;">The cascade reset problem</div>
+      <p class="section-body">
+        The most technically and experientially complex design challenge: what happens when a user goes back and changes their department? If someone selects Women's and Men's, picks Streetwear aesthetics and Supreme as a brand, then goes back and removes Men's — Supreme shouldn't survive as a choice. We designed a clear cascade rule: <strong>department changes reset all downstream selections that depended on that department.</strong> Women's choices survive. Men's choices are cleared. This required careful state management and back-navigation design to prevent users ending up with contradictory preferences.
+      </p>
+
+      <div class="section-title" style="font-size:18px; margin-top:32px; margin-bottom:12px;">Size complexity without cognitive overload</div>
+      <p class="section-body">
+        Women's sizing alone spans 4 categories (Standard, Juniors, Petite, Maternity) × 3 garment types (Dresses, Pants, Shoes) × up to 15 size options each. Displaying this as a form would be catastrophic. Our solution was the action sheet: tapping a department opens a bottom sheet with tabbed size categories, chip-based selection, and a clear 4-selection cap. The "Add Later" CTA lets users move forward without being blocked by sizing — a critical escape hatch for users who shop across sizes or haven't decided yet.
+      </p>
+
+      <div class="section-title" style="font-size:18px; margin-top:32px; margin-bottom:12px;">Balancing signal collection with conversion risk</div>
+      <p class="section-body">
+        Every additional step in an onboarding flow is a potential drop-off point. Our constraint from product was explicit: <strong>do not decrease signup conversion rates.</strong> We addressed this through three mechanisms: (1) every on-ramp step has a prominent Skip CTA, (2) skipping is never penalized — the app works just fine with zero preferences set, and (3) the value exchange is communicated upfront: "Tell us your style, we'll show you the good stuff." The A/B test was designed to measure both signal fill rate and signup-to-feed conversion simultaneously.
+      </p>
+
+      <!-- SCREENS PLACEHOLDER -->
+      <div class="screen-grid-3" style="margin-top:40px;">
+        <div class="screen screen-lg">
+          <div class="screen-tag">Screen</div>
+          <div class="screen-title">Landing · Sign Up</div>
+        </div>
+        <div class="screen screen-lg">
+          <div class="screen-tag">Screen</div>
+          <div class="screen-title">Department · Sizes</div>
+        </div>
+        <div class="screen screen-lg">
+          <div class="screen-tag">Screen</div>
+          <div class="screen-title">Aesthetics · Brands</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 IMPACT -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">07</div>
+      <div class="section-kicker">Impact & Results</div>
+      <h2 class="section-title">Turning new users into known users</h2>
+      <p class="section-body">
+        The redesigned onboarding was A/B tested across US and CA markets, configured via Feature Settings to allow controlled rollout and rapid iteration. The primary goal was to hit a signal fill rate above 50% for new users — a 4× improvement over baseline — without any regression in signup conversion.
+      </p>
+
+      <div class="lift-grid">
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Signal fill rate for new users</div>
+            <div class="lift-context">First-party preference signals collected during on-ramp</div>
+          </div>
+          <div class="lift-badge">~12% → &gt;50%</div>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Brand preference completion rate</div>
+            <div class="lift-context">Users who selected at least one brand during on-ramp</div>
+          </div>
+          <div class="lift-badge">65% of on-ramp users</div>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Department selection rate</div>
+            <div class="lift-context">Users who completed the first on-ramp step</div>
+          </div>
+          <div class="lift-badge">Tracked in A/B test</div>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Signup conversion rate</div>
+            <div class="lift-context">Maintained parity with control — no regression</div>
+          </div>
+          <div class="lift-badge">No regression</div>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Aesthetic-to-brand conversion</div>
+            <div class="lift-context">Users who selected aesthetics and then selected matching brands</div>
+          </div>
+          <div class="lift-badge">44% brand-aesthetic match</div>
+        </div>
+        <div class="lift-row">
+          <div>
+            <div class="lift-desc">Feed relevance score (first session)</div>
+            <div class="lift-context">Post-launch measurement via personalization model</div>
+          </div>
+          <div class="lift-badge tbd">Pending post-launch data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 LEARNINGS -->
+  <div class="container">
+    <div class="section">
+      <div class="section-num">08</div>
+      <div class="section-kicker">Reflections</div>
+      <h2 class="section-title">What I learned leading this project</h2>
+      <div class="learnings-grid">
+        <div class="learning-card">
+          <div class="num">01</div>
+          <div class="title">Skip CTAs are a feature, not a failure</div>
+          <div class="body">Every product instinct said "make the step mandatory so we get the data." But data collected under friction is low-quality data. Users who genuinely engage with aesthetic selection give us far better signal than those who click through to get past a gate. Designing Skip as a first-class experience, not an afterthought, was one of our most important decisions.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">02</div>
+          <div class="title">Cascade logic must be designed before you design screens</div>
+          <div class="body">We spent significant time mapping the state management logic before touching Figma. What happens if Men's is deselected on step 1 after the user is on step 3? What persists and what resets? Getting this into a decision tree first saved us weeks of rework and prevented inconsistencies between design and engineering specs.</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">03</div>
+          <div class="title">Aesthetics unlock brand discovery at scale</div>
+          <div class="body">Asking users to pick from 15,000+ brands is paralysis. Asking them to pick a vibe is effortless. The aesthetic → brand mapping was the insight that made the entire brand selection step tractable. It also gave us a richer, more durable signal — "Minimalist aesthetic" ages better as a preference than "bought COS once."</div>
+        </div>
+        <div class="learning-card">
+          <div class="num">04</div>
+          <div class="title">Feature flags enabled design iteration at launch speed</div>
+          <div class="body">Every question copy, every option set, every screen in the flow was FS-controlled. This meant we could iterate on the demographics questions based on completion data without a client release. Designing for configurability from day one meant the product team could run follow-up experiments without involving engineering on every change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="container">
+    <div class="thankyou">
+      <h2>Thanks for reading ✦</h2>
+      <p>Want to discuss the research, the cascade system, or what we'd do differently? Let's talk.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-back"> Back to all work</a>
+    <span class="footer-credit">Divya Karunakaran · 2025</span>
+  </footer>
+
+</body>
+</html>

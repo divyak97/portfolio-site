@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divya Karunakaran – Viva Goals Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #ffffff;
+      --bg2:        #f5f5f5;
+      --bg3:        #eeeeee;
+      --border:     rgba(0,0,0,0.08);
+      --text:       #111111;
+      --text-muted: #555555;
+      --text-dim:   #999999;
+      --accent:     #ff5c35;
+      --accent2:    #ff8c6b;
+      --radius:     16px;
+      --radius-sm:  10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back::before { content: "←"; }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 24px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-label::before {
+      content: "";
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+
+    .hero-stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .divider-v {
+      width: 1px; height: 40px;
+      background: var(--border);
+    }
+
+    /* ── COVER ── */
+    .cover {
+      width: 100%;
+      height: 480px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
+      border-radius: var(--radius);
+      margin: 0 auto 80px;
+      max-width: 860px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(255,92,53,0.18) 0%, transparent 70%);
+    }
+    .cover-inner { text-align: center; position: relative; }
+    .cover-inner span {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+    .cover-inner h2 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(255,255,255,0.95);
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(255,92,53,0.08);
+      border: 1px solid rgba(255,92,53,0.2);
+      border-radius: 50px;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 64px 0; }
+
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    /* ── OVERVIEW BOX ── */
+    .overview-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-bottom: 32px;
+    }
+
+    .overview-box p { font-size: 16px; color: var(--text-muted); line-height: 1.8; }
+    .overview-box p + p { margin-top: 16px; }
+
+    /* ── ROLE GRID ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .role-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .role-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .role-card-content { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+    .role-card-content strong { color: var(--text); font-weight: 600; }
+
+    /* ── AIM BOX ── */
+    .aim-box {
+      background: linear-gradient(135deg, rgba(255,92,53,0.06) 0%, rgba(255,140,107,0.03) 100%);
+      border: 1px solid rgba(255,92,53,0.15);
+      border-radius: var(--radius);
+      padding: 48px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .aim-box .section-label { color: var(--accent); }
+
+    .aim-box p {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ── PROBLEMS GRID ── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .problem-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .problem-card:hover {
+      border-color: rgba(0,0,0,0.14);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .problem-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .problem-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .problem-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    .problem-card.highlight-card {
+      background: linear-gradient(135deg, rgba(255,92,53,0.07) 0%, rgba(255,92,53,0.03) 100%);
+      border-color: rgba(255,92,53,0.2);
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--bg2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .callout p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── BUSINESS GOALS ── */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .goal-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .goal-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .goal-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .goal-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── PRINCIPLES ── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .principle-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+    }
+
+    .principle-name { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .principle-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── HIGHLIGHT SECTIONS ── */
+    .highlight-section {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-list li { display: flex; gap: 14px; align-items: flex-start; }
+
+    .feature-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-list li div { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    .feature-list li strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .feature-list li em {
+      display: block;
+      font-size: 13px;
+      font-style: normal;
+      color: var(--text-dim);
+      margin-top: 6px;
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.04);
+      border-radius: 8px;
+      border-left: 2px solid var(--border);
+    }
+
+    /* ── MOCKUP PLACEHOLDER ── */
+    .mockup {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      border-radius: 12px;
+      margin: 28px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mockup::after {
+      content: "Design Preview";
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── EXPLORATION ── */
+    .exploration-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .exploration-box p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .testimonial-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+
+    .testimonial-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+
+    .testimonial-card::before {
+      content: "\201C";
+      position: absolute;
+      top: 20px; left: 28px;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--accent);
+      font-family: Georgia, serif;
+      opacity: 0.4;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      padding-top: 20px;
+      font-style: italic;
+    }
+
+    /* ── NEXT STEPS ── */
+    .next-steps-box {
+      background: linear-gradient(135deg, rgba(255,92,53,0.05) 0%, rgba(0,0,0,0.02) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 64px 48px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .next-steps-box .section-label { margin-bottom: 16px; }
+
+    .next-steps-box h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .next-steps-box p { font-size: 16px; color: var(--text-muted); }
+
+    /* ── THANK YOU ── */
+    .thankyou { text-align: center; padding: 80px 24px; }
+
+    .thankyou h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .thankyou p { font-size: 16px; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-back:hover { color: var(--text); border-color: rgba(0,0,0,0.2); }
+    .footer-back::before { content: "←"; }
+
+    .footer-credit { font-size: 13px; color: var(--text-dim); }
+
+    /* ── GLIMPSE GRID ── */
+    .glimpse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .glimpse-item {
+      background: linear-gradient(135deg, #1e1e2e 0%, #12122a 100%);
+      border-radius: var(--radius-sm);
+      height: 160px;
+      border: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 60px; }
+      .role-grid { grid-template-columns: 1fr; }
+      .goals-grid { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .glimpse-grid { grid-template-columns: 1fr 1fr; }
+      .highlight-section { padding: 32px 24px; }
+      .aim-box { padding: 32px 24px; }
+      .next-steps-box { padding: 48px 24px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="home.html" class="nav-logo">Divya Karunakaran</a>
+    <a href="home.html" class="nav-back">Back to works</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-label">Case Study</div>
+      <h1 class="hero-title">Redefining creation<br>experience</h1>
+      <p class="hero-subtitle">
+        Viva Goals — A deep dive into how we redesigned Microsoft's goal management platform to serve millions of enterprise users.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <span class="hero-stat-num">20M</span>
+          <span class="hero-stat-label">Monthly Active Users</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">1.5K</span>
+          <span class="hero-stat-label">Paying Customers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVER -->
+  <div class="container">
+    <div class="cover">
+      <div class="cover-inner">
+        <span>Microsoft</span>
+        <h2>Viva Goals</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="container">
+    <section>
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">About Microsoft Viva</h2>
+      <div class="overview-box">
+        <p>Microsoft Viva is an integrated employee experience platform that gives users the ability to connect, gain insights, learn, and reach goals in the flow of your work.</p>
+        <p>Viva Goals is a goal management platform that leverages the OKR framework to align teams with organizational priorities, streamline collaboration toward a shared mission, and enhance business outcomes through continuous progress tracking.</p>
+      </div>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="role-card-title">My Role</div>
+          <div class="role-card-content">
+            <strong>Lead Designer</strong><br/>
+            Feature scoping · User research · Interaction Design · Prototyping · User testing
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-title">The Team</div>
+          <div class="role-card-content">
+            2 Product Managers · 2 Engineering Managers · 18 Engineers · 1 UX Researcher · Partner Design Director
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AIM -->
+    <div class="aim-box">
+      <div class="section-label">Our Aim</div>
+      <p>To transform Viva Goals into a sophisticated, user-friendly goal management solution capable of seamlessly adapting to the demands of enterprises.</p>
+    </div>
+
+    <!-- GLIMPSE -->
+    <section>
+      <div class="section-label">Glimpse of Final Designs</div>
+      <h2 class="section-title">A preview of what we built</h2>
+      <div class="glimpse-grid">
+        <div class="glimpse-item">Draft Space</div>
+        <div class="glimpse-item">Inline Creation</div>
+        <div class="glimpse-item">Team Setup</div>
+        <div class="glimpse-item">Copilot Import</div>
+        <div class="glimpse-item">Template Library</div>
+        <div class="glimpse-item">Sub-goal View</div>
+      </div>
+    </section>
+
+    <!-- PROBLEMS -->
+    <section>
+      <div class="section-label">What are the problems?</div>
+      <h2 class="section-title">Key challenges we identified</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-num">01</div>
+          <div class="problem-title">Focused on a single goal framework</div>
+          <div class="problem-desc">Viva Goals, designed around the OKR framework, falls short in meeting the needs of teams using diverse goal-setting methodologies.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num">02</div>
+          <div class="problem-title">Complex hierarchy</div>
+          <div class="problem-desc">The OKR framework by nature has a complex hierarchy, which led to a steep learning curve for users to set up goals for their teams and organizations.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num">03</div>
+          <div class="problem-title">Too many terminologies</div>
+          <div class="problem-desc">Terminologies such as Objectives, Key Results, Check-ins, and Alignment can make the product feel overly complex.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num">04</div>
+          <div class="problem-title">Needs an expert to implement</div>
+          <div class="problem-desc">Due to the complex OKR methodology, implementing Viva Goals across teams often requires the guidance of an expert, such as an OKR champion.</div>
+        </div>
+        <div class="problem-card highlight-card">
+          <div class="problem-num">05</div>
+          <div class="problem-title">Higher drop-off rate</div>
+          <div class="problem-desc">With the help of data scientists we understood that the goal creation experience had one of the highest drop-off rates — closer to <strong>47%</strong>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS GROUP -->
+    <section>
+      <div class="section-label">Our Focus Group</div>
+      <h2 class="section-title">Who are we building this for?</h2>
+      <div class="overview-box">
+        <p>We focused on Senior Leaders and Leadership Teams (LTs) who are responsible for planning, creating, managing, and executing organizational goals. These users are most affected by the complexity of the current experience and have the highest drop-off rates.</p>
+      </div>
+    </section>
+
+    <!-- CUSTOMER VOICE -->
+    <section>
+      <div class="section-label">Customer's Voice</div>
+      <h2 class="section-title">Our customers' perspective on the current experience</h2>
+      <p class="section-subtitle">We conducted user interviews to understand their friction and behaviour. We also accounted for existing feedback received from our customer base.</p>
+      <div class="callout">
+        <p><strong>UX Audit:</strong> I conducted a UX audit on the existing experience to understand the gap to fill in order to satisfy user needs and business goals, and to find areas of inconsistent patterns and usability issues.</p>
+      </div>
+    </section>
+
+    <!-- BUSINESS GOALS -->
+    <section>
+      <div class="section-label">Our Business Goals</div>
+      <h2 class="section-title">Where did we put our efforts in</h2>
+      <div class="goals-grid">
+        <div class="goal-card">
+          <span class="goal-icon">✦</span>
+          <div class="goal-title">A simple goal creation experience</div>
+          <div class="goal-desc">Re-define the goal creation experience that's easier for LTs and Senior Leaders to plan, create, manage and execute goals in Viva Goals.</div>
+        </div>
+        <div class="goal-card">
+          <span class="goal-icon">◈</span>
+          <div class="goal-title">Improve goal planning experience</div>
+          <div class="goal-desc">Encouraging the Viva Goals users to perform goal planning cycles entirely within Viva Goals.</div>
+        </div>
+        <div class="goal-card">
+          <span class="goal-icon">◉</span>
+          <div class="goal-title">Boost trust by strategic visibility</div>
+          <div class="goal-desc">Design experiences that empower users to control their content and confidently manage its accessibility.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PRINCIPLES -->
+    <section>
+      <div class="section-label">Our Foundation</div>
+      <h2 class="section-title">Design Principles</h2>
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-name">Simplicity</div>
+          <div class="principle-desc">Strive for clarity, emphasize ease of use, focus on essentials.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-name">Flexibility</div>
+          <div class="principle-desc">OKRs and more — cater to a broader audience. Ability to customize and consume goal information the way users want.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-name">Familiarity</div>
+          <div class="principle-desc">Embrace M365 completely, modernize the application to reflect the Microsoft ecosystem.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- HIGHLIGHTS HEADER -->
+  <div class="container">
+    <section>
+      <h2 class="section-title" style="font-size:clamp(28px,4vw,48px); letter-spacing:-2px;">A whole new creation experience</h2>
+    </section>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="container">
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Hustle free goal planning made possible</div>
+      <ul class="feature-list">
+        <li><div><strong>Draft System</strong>By introducing the draft option at the side nav, users can now plan goals for their teams. The draft space lets users refine and review their goals before publishing.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Goal creation is no more a form</div>
+      <ul class="feature-list">
+        <li><div><strong>Goal List</strong>With Goal List in place, users no longer need a third-party tool to plan their team goals.</div></li>
+        <li><div><strong>Inline Creation Experience</strong>Goal creation is made simple with the table view. The inline creation experience helps users store goal-related information effortlessly.</div></li>
+        <li><div><strong>Auto-save</strong>Editing and saving of goal information is simpler with auto-save, reducing multiple clicks.<em>Data says: Most users perform planning in third-party tools like Notion, MS Excel, MS Word, ADO, etc. The new inline experience will make users feel right at home during their planning.</em></div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Single stop solution for any goal framework</div>
+      <ul class="feature-list">
+        <li><div><strong>Highly Flexible</strong>With the ability to customize labels, users are no longer forced to follow a single goal framework.</div></li>
+        <li><div><strong>Easy Collaboration</strong>Users can invite collaborators to the goal list to get help in defining team goals.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Highly customizable</div>
+      <ul class="feature-list">
+        <li><div><strong>Customize Metadata</strong>With the add column functionality, users can choose the necessary metadata for their goals.<em>From initial user testing, we realized users were not able to understand the purpose of list options, so we added visual cues and short descriptions for each — helping users realize when and how to use them.</em></div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+  </div>
+
+  <!-- EXPLORATION -->
+  <div class="container">
+    <section>
+      <div class="section-label">Exploration</div>
+      <h2 class="section-title">This is how the creation experience evolved</h2>
+      <div class="exploration-box">
+        <p>Through multiple rounds of iteration, customer interviews, and internal reviews, the experience evolved from a form-heavy approach to a fluid, table-first interaction model that feels native to Microsoft 365.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- MORE HIGHLIGHTS -->
+  <div class="container">
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Seamless interactive sub-goal creation</div>
+      <ul class="feature-list">
+        <li><div><strong>Simplified Interaction</strong>After evaluating initial designs with customers and partners, we arrived at a seamless sub-goal interaction — enabling users to enter sub-goal details without leaving to a different page or screen.</div></li>
+        <li><div><strong>A win-win for Senior Managers and Managers</strong>With the sub-goal expand and collapse interaction in the table view, Senior Managers get a bird's-eye view of goals and sub-goals, while Managers can detail down the metadata of sub-goals without losing visibility of parent goals.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Planning and execution of goals</div>
+      <ul class="feature-list">
+        <li><div><strong>Move Goal List to a Team</strong>After planning and defining goals for a group, Senior Managers can now move the list to the specified team to make it functional — enabling both planning and execution within Viva Goals.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Goal creation — Copilot experience</div>
+      <ul class="feature-list">
+        <li><div><strong>Upload your file, Copilot takes care of the rest</strong>Customer goals usually live in MS Word, MS Excel, or third-party apps. We integrated Copilot with Viva Goals so customers can simply import their file and Copilot formats their goals into a suitable table with necessary columns in place.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Goal creation from templates</div>
+      <ul class="feature-list">
+        <li><div><strong>Template Library</strong>We curated template sets to best reflect widely used goal frameworks. Templates also help users visualize their data in the format they expect.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Managing and creating teams at ease</div>
+      <ul class="feature-list">
+        <li><div><strong>M365 Group Integration</strong>Senior managers and managers faced challenges creating teams and managing team settings. We introduced the ability to create teams directly from existing M365 groups — significantly reducing setup time and effort.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+
+    <div class="highlight-section">
+      <div class="badge">Highlights</div>
+      <div class="highlight-title">Designing with Accessibility in mind</div>
+      <ul class="feature-list">
+        <li><div><strong>Inclusive by Design</strong>Accessibility was an explicit consideration throughout the redesign — ensuring the experience works for all users regardless of ability or assistive technology needs.</div></li>
+      </ul>
+      <div class="mockup"></div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER VALIDATION -->
+  <div class="container">
+    <section>
+      <div class="section-label">Customer Validation</div>
+      <h2 class="section-title">Hear from our customers</h2>
+      <p class="section-subtitle">Once the new experience was ready, we reached out to Viva Goals customers for validation. The feedback was positive — customers were able to discover different options to create a goal and were happy about the simplicity and ability to customize.</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card"><p class="testimonial-text">The canvas looks super clean and simple.</p></div>
+        <div class="testimonial-card"><p class="testimonial-text">As a manager my focus is just on sub-goals. With the new redesign, managing sub-goals feels simpler and effortless.</p></div>
+        <div class="testimonial-card"><p class="testimonial-text">I usually have trouble creating an objective within Viva Goals, but the improved experience feels smooth.</p></div>
+        <div class="testimonial-card"><p class="testimonial-text">Now with the goal list I'll have control over who can view my draft goal list. That's a big relief.</p></div>
+        <div class="testimonial-card"><p class="testimonial-text">Cool! I can now term my goals the way my team will understand.</p></div>
+        <div class="testimonial-card"><p class="testimonial-text">It's a welcoming idea to place planning and execution within Viva Goals.</p></div>
+      </div>
+    </section>
+
+    <!-- NEXT STEPS -->
+    <div class="next-steps-box">
+      <div class="section-label">Next Steps Ahead</div>
+      <h2>Making creation mobile possible</h2>
+      <p>The next phase involves extending the redesigned creation experience to mobile — bringing the same simplicity and flexibility to users on the go.</p>
+    </div>
+
+    <!-- THANK YOU -->
+    <div class="thankyou">
+      <h2>Thank you for reading</h2>
+      <p>More case studies on the way.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="home.html" class="footer-back">Go back to works</a>
+    <span class="footer-credit">Divya Karunakaran · Sr. Product Designer</span>
+  </footer>
+
+</body>
+</html>
