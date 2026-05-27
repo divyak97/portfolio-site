@@ -76,7 +76,7 @@
 
     /* ── LAYOUT ── */
     .container {
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -84,7 +84,7 @@
     /* ── HERO ── */
     .hero {
       padding: 148px 24px 64px;
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -419,6 +419,14 @@
       margin: 32px 0;
     }
 
+    /* ── SURVEY BENTO GRID ── */
+    .survey-bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 12px;
+    }
+
     /* ── PIVOT COMPARISON ── */
     .comparison {
       display: grid;
@@ -625,6 +633,7 @@
       .comparison { grid-template-columns: 1fr; }
       .screen-grid-2 { grid-template-columns: 1fr; }
       .screen-grid-3 { grid-template-columns: 1fr; }
+      .survey-bento { grid-template-columns: 1fr; }
       .learnings-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -786,6 +795,63 @@
     @media (max-width: 700px) {
       .persona-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── FULL BLEED IMAGE ── */
+    .full-bleed-img {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      margin-top: 40px;
+      overflow: hidden;
+    }
+    .full-bleed-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.88);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 24px;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-overlay img {
+      max-width: 94vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      cursor: default;
+    }
+    .lb-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.22); }
+
+    /* make all content images zoomable */
+    .container img, .hero-cover img, .section-image img,
+    .insight-box-img img, .full-bleed-img img {
+      cursor: zoom-in;
+    }
   </style>
 </head>
 <body>
@@ -812,10 +878,6 @@
           <div class="meta-value">Lead Product Designer<br>Monetization</div>
         </div>
         <div class="meta-item">
-          <div class="meta-label">Timeline</div>
-          <div class="meta-value">2022 – Present<br>3.5 years</div>
-        </div>
-        <div class="meta-item">
           <div class="meta-label">Platforms</div>
           <div class="meta-value">Web · iOS<br>Android</div>
         </div>
@@ -834,20 +896,20 @@
     <!-- METRICS -->
     <div class="metrics-row">
       <div class="metric-card">
-        <div class="metric-num"><span class="accent">+22%</span></div>
-        <div class="metric-desc">Free trial starts from payment method expansion</div>
+        <div class="metric-num"><span class="accent">$1K → $4M</span></div>
+        <div class="metric-desc">Annual revenue — grown from a $1K pilot to a $4M product</div>
       </div>
       <div class="metric-card">
-        <div class="metric-num"><span class="accent">+5%</span></div>
-        <div class="metric-desc">Free trial starts from pre-listing boost entry point</div>
+        <div class="metric-num"><span class="accent">50K+</span></div>
+        <div class="metric-desc">Active sellers on the platform, up from 100 at launch</div>
       </div>
       <div class="metric-card">
-        <div class="metric-num"><span class="accent">2×</span></div>
-        <div class="metric-desc">Conversion lift from My Closet app entry point</div>
+        <div class="metric-num"><span class="accent">5×</span></div>
+        <div class="metric-desc">Increase in daily acquisition volume from app entry point expansions</div>
       </div>
       <div class="metric-card">
-        <div class="metric-num"><span class="accent">↑</span></div>
-        <div class="metric-desc">CTR lift on buyer side from "Promoted" → "Ad" relabel</div>
+        <div class="metric-num"><span class="accent">+12%</span></div>
+        <div class="metric-desc">CTR lift on buyer-side ad placements across the Poshmark app</div>
       </div>
     </div>
   </div>
@@ -881,7 +943,8 @@
           <div class="insight-box-title">The core design challenge</div>
           <p style="font-size:17px; font-weight:600; color:var(--text); line-height:1.5">
             Poshmark sellers are not performance marketers.<br>
-            <span style="font-size:16px; font-weight:400; color:var(--text-2)">Most are everyday people selling from their closets — not advertisers familiar with CPC models, campaign setup, or keyword targeting. How might we make advertising feel effortless for them?</span>
+            <span style="font-size:16px; font-weight:400; color:var(--text-2)">Most are everyday people selling from their closets — not advertisers familiar with CPC models, campaign setup, or keyword targeting.</span>
+            <span style="display:block; margin-top:20px; font-size:20px; font-weight:700; color:var(--accent); letter-spacing:-0.5px; line-height:1.4;">How might we help sellers sell more while making promotion feel effortless and trustworthy?</span>
           </p>
         </div>
         <div class="insight-box-img">
@@ -898,7 +961,6 @@
           <!-- Bryn -->
           <div class="persona-card">
             <div class="persona-head">
-              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
               <div>
                 <div class="persona-name">Bryn</div>
                 <div class="persona-tag">Full-Time Luxury Reseller · Desktop</div>
@@ -928,7 +990,6 @@
           <!-- Ashley -->
           <div class="persona-card">
             <div class="persona-head">
-              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
               <div>
                 <div class="persona-name">Ashley</div>
                 <div class="persona-tag">Side Hustle Mom · Mobile</div>
@@ -958,7 +1019,6 @@
           <!-- Cody -->
           <div class="persona-card">
             <div class="persona-head">
-              <div class="persona-avatar"><span class="persona-avatar-label">Photo</span></div>
               <div>
                 <div class="persona-name">Cody</div>
                 <div class="persona-tag">Sneaker Hustler · Mobile</div>
@@ -1011,7 +1071,7 @@
       </div>
 
       <p class="section-body">
-        This was the defining moment. Instead of asking sellers to make 10 decisions, we'd ask them to make <strong>one: a daily budget.</strong> Their entire closet would be promoted automatically based on buyer search relevance. They'd only pay per click.
+        This was the defining moment. Instead of asking sellers to make 10 decisions, we'd ask them to make <strong>one: a weekly budget.</strong> Their entire closet would be promoted automatically based on buyer search relevance. They'd only pay per click.
       </p>
 
       <!-- COMPARISON -->
@@ -1031,7 +1091,7 @@
           <div class="comparison-label">After — Promoted Closet</div>
           <div class="comparison-title">Simple, seller-first</div>
           <ul class="comparison-items">
-            <li><span class="dot"></span>Set one daily budget</li>
+            <li><span class="dot"></span>Set one weekly budget</li>
             <li><span class="dot"></span>Whole closet auto-promoted</li>
             <li><span class="dot"></span>Pay only per click</li>
             <li><span class="dot"></span>Relevance handled by platform</li>
@@ -1044,12 +1104,6 @@
         <img src="promoted-closet.png" alt="Promoted Closet — simplified concept" style="width:100%; height:auto; display:block; border-radius:var(--radius);" />
       </div>
 
-      <div class="insight-box" style="margin-top:32px">
-        <div class="insight-box-title">Senior design insight</div>
-        <p style="font-size:15px; color:var(--text-2); line-height:1.7">
-          The market-standard pattern wasn't wrong — it was wrong <em>for our user.</em> Knowing when to throw away competitor-research-backed precedent and design for the actual person in front of you is the hardest call to make as a designer. This decision defined every UX direction for the next 3 years.
-        </p>
-      </div>
     </div>
   </div>
 
@@ -1064,58 +1118,24 @@
         We launched on web first — Pro sellers were more active there, and the platform allowed faster experimentation before constraining to mobile. I led the end-to-end UX: onboarding, budget setup, payment flow, dashboard, reporting, and seller education.
       </p>
 
-      <p class="section-body" style="margin-top:16px">
-        The biggest challenge was introducing ad concepts without alienating everyday sellers. Through moderated usability testing, we uncovered three recurring issues:
-      </p>
-
-      <div class="insight-box">
-        <div class="insight-box-title">What usability testing revealed</div>
-        <ul class="insight-list">
-          <li><strong>Ad jargon alienated sellers</strong> — "CPM," "impressions," and "ad slots" made them feel they were in the wrong product</li>
-          <li><strong>Content density caused drop-off</strong> — too much text above the fold before they understood the value</li>
-          <li><strong>Perceived complexity = perceived risk</strong> — visual complexity translated directly into hesitation to spend money</li>
-        </ul>
-      </div>
-
-      <p class="section-body">
-        These insights drove a complete language and layout overhaul: replaced ad jargon with seller language ("budget," "views," "sales"), cut overview content density by ~40%, and raised the primary CTA above the fold.
-      </p>
-
       <!-- ONBOARDING SECTION -->
       <div style="margin-top:40px">
         <p style="font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-3); margin-bottom:16px">Forced Onboarding — 3 Core Ideas</p>
         <p class="section-body">To build confidence before sellers committed any budget, we introduced a lightweight mandatory onboarding focused on just three things sellers needed to understand:</p>
       </div>
 
-      <div class="screen-grid-3">
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">Card 1</span>
-          <span class="screen-title">Your closet is automatically promoted</span>
-        </div>
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">Card 2</span>
-          <span class="screen-title">You only pay for clicks</span>
-        </div>
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">Card 3</span>
-          <span class="screen-title">You get performance insights</span>
-        </div>
+      <div class="full-bleed-img">
+        <img src="Promoted-closet-core-screens.png" alt="Promoted Closet core screens" />
       </div>
 
-      <div class="screen screen-lg">
-        <span class="screen-tag">Screen</span>
-        <span class="screen-title">Web MVP — Budget setup + Creation flow</span>
-      </div>
-
-      <div class="screen-grid-2">
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Dashboard — Initial MVP</span>
-        </div>
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Language iterations — before/after</span>
-        </div>
+      <!-- MANAGE PROMOTION VIDEO -->
+      <div style="margin-top: 56px;">
+        <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:20px;">Manage Promotion</p>
+        <video
+          autoplay loop muted playsinline
+          style="width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); box-shadow:0 8px 32px rgba(0,0,0,0.08); display:block;">
+          <source src="manage-budget.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -1135,7 +1155,7 @@
         This direct feedback loop directly shaped the product. Sellers told us what they needed — we shipped it.
       </p>
 
-      <div class="insight-box">
+      <div class="insight-box" style="margin-top:32px;">
         <div class="insight-box-title">Seller-requested features we shipped</div>
         <ul class="insight-list">
           <li><strong>Listing-level impression data</strong> — sellers wanted to see which items their ads were actually pushing</li>
@@ -1145,92 +1165,32 @@
         </ul>
       </div>
 
-      <div class="screen-grid-2">
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Dashboard — Phase 2 with Yesterday's Highlights</span>
-        </div>
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Sprig survey data / seller feedback signals</span>
-        </div>
+      <!-- LISTINGS SOLD VIDEO -->
+      <div style="margin-top: 48px;">
+        <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:20px;">Listings Sold &amp; Impressions</p>
+        <video
+          autoplay loop muted playsinline
+          style="width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--border); box-shadow:0 8px 32px rgba(0,0,0,0.08); display:block;">
+          <source src="listings-sold.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
 
-  <!-- ─── SECTION 5: SCALING CONVERSION ─── -->
+  <!-- ─── SECTION 5: APP SCREENS ─── -->
   <div class="container">
     <div class="section">
       <div class="section-num">05</div>
-      <div class="section-kicker">Scaling Conversion</div>
-      <h2 class="section-title">The experiments that moved the needle</h2>
-
-      <p class="section-body">
-        Once the foundation was solid, the work shifted to continuous optimization. Each test had a hypothesis grounded in research. I led design across all of them, guided PM on UX strategy, and shaped follow-up tests based on results — moving from executing flows to driving the question of <strong>what to test next.</strong>
-      </p>
-
-      <!-- LIFT TABLE -->
-      <div class="lift-grid">
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">Payment method expansion — PayPal &amp; Venmo</div>
-            <div class="lift-context">Casual sellers don't trust credit cards on new products</div>
-          </div>
-          <span class="lift-badge">+22% free trial starts</span>
-        </div>
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">Pre-listing Boost entry point</div>
-            <div class="lift-context">Sellers are most motivated right after creating a listing</div>
-          </div>
-          <span class="lift-badge">+~5% free trial starts</span>
-        </div>
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">iOS payment redirect to mWeb</div>
-            <div class="lift-context">Apple's in-app payment wall was killing iOS conversion</div>
-          </div>
-          <span class="lift-badge">+~5% free trial starts</span>
-        </div>
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">Budget UI revamp with impressions data</div>
-            <div class="lift-context">Sellers couldn't intuit what their budget would actually get them</div>
-          </div>
-          <span class="lift-badge">Measurable lift</span>
-        </div>
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">Free trial for churned sellers</div>
-            <div class="lift-context">A second chance with no risk to re-engage lapsed users</div>
-          </div>
-          <span class="lift-badge">Measurable lift</span>
-        </div>
-        <div class="lift-row">
-          <div>
-            <div class="lift-desc">One-time Boost A/B</div>
-            <div class="lift-context">Casual sellers want event-driven boosts, not ongoing campaigns</div>
-          </div>
-          <span class="lift-badge tbd">In test</span>
-        </div>
-      </div>
-
-      <div class="screen-grid-2">
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Budget UI — before</span>
-        </div>
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Screen</span>
-          <span class="screen-title">Budget UI — after (impressions data)</span>
-        </div>
-      </div>
-
-      <div class="screen screen-md">
-        <span class="screen-tag">Screen</span>
-        <span class="screen-title">Pre-listing Boost entry point — contextual design</span>
-      </div>
+      <div class="section-kicker">Mobile Experience</div>
+      <h2 class="section-title">Brought to life on iOS &amp; Android</h2>
     </div>
+  </div>
+
+  <div class="full-bleed-img" style="margin-top:0;">
+    <img src="App core screens 1.png" alt="App core screens" onclick="openLb(this)" style="cursor:zoom-in;">
+  </div>
+  <div class="full-bleed-img" style="margin-top:0;">
+    <img src="App core screens 2.png" alt="App core screens" onclick="openLb(this)" style="cursor:zoom-in;">
   </div>
 
   <!-- ─── SECTION 6: MOBILE ─── -->
@@ -1252,26 +1212,11 @@
         <p>The most impactful design work isn't always inside the feature — it's about how users discover it.</p>
       </div>
 
-      <div class="screen screen-lg">
-        <span class="screen-tag">Screen</span>
-        <span class="screen-title">My Closet banner entry point — the conversion doubler</span>
-      </div>
-
-      <div class="screen-grid-3">
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">iOS</span>
-          <span class="screen-title">App onboarding</span>
-        </div>
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">iOS</span>
-          <span class="screen-title">iOS payment redirect flow</span>
-        </div>
-        <div class="screen screen-sm" style="margin:0">
-          <span class="screen-tag">Android</span>
-          <span class="screen-title">App dashboard</span>
-        </div>
-      </div>
     </div>
+  </div>
+
+  <div class="full-bleed-img" style="margin-top:0;">
+    <img src="Entry Points.png" alt="Entry points — the conversion doubler" onclick="openLb(this)" style="cursor:zoom-in;">
   </div>
 
   <!-- ─── SECTION 7: JOURNEY MAP ─── -->
@@ -1300,26 +1245,27 @@
         </ul>
       </div>
 
-      <div class="screen screen-xl">
-        <span class="screen-tag">Artifact</span>
-        <span class="screen-title">User Journey Map — end-to-end seller experience</span>
-      </div>
-
-      <div class="screen-grid-2">
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Workshop</span>
-          <span class="screen-title">Cross-functional brainstorming session</span>
-        </div>
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Research</span>
-          <span class="screen-title">Sprig survey data snapshots</span>
-        </div>
-      </div>
-
       <p class="section-body" style="margin-top:32px">
         The journey map directly contributed to the <strong>2026 1P monetization roadmap.</strong> This is when my role shifted from "designer who ships" to "designer who shapes strategy."
       </p>
     </div>
+  </div>
+
+  <!-- Survey bento grid — full-bleed -->
+  <div style="width:100vw; position:relative; left:50%; margin-left:-50vw; margin-top:48px;">
+    <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:16px; padding:0 24px;">Sprig Survey Data</p>
+    <div class="survey-bento">
+      <img src="Survey 1.png" alt="Survey 1" onclick="openLb(this)" style="cursor:zoom-in; width:100%; height:auto; display:block; border-radius:var(--radius); border:1px solid var(--border);">
+      <img src="Survey 2.png" alt="Survey 2" onclick="openLb(this)" style="cursor:zoom-in; width:100%; height:auto; display:block; border-radius:var(--radius); border:1px solid var(--border);">
+      <img src="Survey 3.png" alt="Survey 3" onclick="openLb(this)" style="cursor:zoom-in; width:100%; height:auto; display:block; border-radius:var(--radius); border:1px solid var(--border);">
+      <img src="Survey 4.png?v=2" alt="Survey 4" onclick="openLb(this)" style="cursor:zoom-in; width:100%; height:auto; display:block; border-radius:var(--radius); border:1px solid var(--border);">
+    </div>
+  </div>
+
+  <!-- Journey Map PDF full-bleed -->
+  <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-top:48px; margin-bottom:20px; max-width:1100px; margin-left:auto; margin-right:auto; padding:0 24px;">User Journey Map</p>
+  <div style="width:100vw; position:relative; left:50%; margin-left:-50vw; margin-bottom:80px;">
+    <iframe src="Promoted Closet - User Journey Map.pdf" style="width:100%; height:85vh; border:none; display:block;" title="Promoted Closet — User Journey Map"></iframe>
   </div>
 
   <!-- ─── SECTION 8: BUYER SIDE ─── -->
@@ -1333,62 +1279,16 @@
         Promoted Closet wasn't only a seller experience problem. On the buyer side, promoted listings were labeled "Promoted." In a design proposal backed by Sprig data, I argued that <strong>"Ad"</strong> was a clearer, more familiar label — borrowed from what buyers already expect across e-commerce.
       </p>
 
-      <div class="screen-grid-2">
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">Before</span>
-          <span class="screen-title">Buyer view — "Promoted" label</span>
-        </div>
-        <div class="screen screen-md" style="margin:0">
-          <span class="screen-tag">After</span>
-          <span class="screen-title">Buyer view — "Ad" label</span>
-        </div>
+      <div style="margin-top:40px; text-align:center;">
+        <img src="Promoted Tag_ Ad.png" alt="Promoted → Ad label comparison" onclick="openLb(this)" style="cursor:zoom-in; max-width:100%; height:auto; display:inline-block; border-radius:var(--radius); border:1px solid var(--border);">
       </div>
 
-      <p class="section-body" style="margin-top:16px">
-        The result: significant CTR lift on promoted listings — more clicks, more billable events, more revenue. <strong>One word. Measurable business impact.</strong>
+      <p class="section-body" style="margin-top:32px">
+        The result: <strong>+12% CTR lift</strong> on promoted listings — more clicks, more billable events, more revenue. <strong>One word. Measurable business impact.</strong>
       </p>
     </div>
   </div>
 
-  <!-- ─── SECTION 9: IMPACT & REFLECTION ─── -->
-  <div class="container">
-    <div class="section">
-      <div class="section-num">09</div>
-      <div class="section-kicker">Impact & Reflection</div>
-      <h2 class="section-title">What growing into senior looked like</h2>
-
-      <p class="section-body">
-        Over 3.5 years, Promoted Closet evolved from a concept doc into a core monetization ecosystem — spanning web, iOS, Android, onboarding, reporting, growth surfaces, payments, and buyer experiences. I drove it as the sole monetization designer from zero-to-one through multiple growth phases.
-      </p>
-
-      <div class="learnings-grid">
-        <div class="learning-card">
-          <div class="num">01</div>
-          <div class="title">From executing flows to framing problems</div>
-          <div class="body">The pivot from Sponsored Listings to Promoted Closet — knowing when to abandon competitor-research precedent for user simplicity.</div>
-        </div>
-        <div class="learning-card">
-          <div class="num">02</div>
-          <div class="title">From taking research as input to running it</div>
-          <div class="body">Led Sprig surveys, moderated usability tests, synthesized hundreds of responses, and built the journey map that shaped the roadmap.</div>
-        </div>
-        <div class="learning-card">
-          <div class="num">03</div>
-          <div class="title">From receiving PM direction to guiding it</div>
-          <div class="body">Shaped what to test next, unblocked the Budget Transparency workstream by partnering with Data to decode backend logic into design direction.</div>
-        </div>
-        <div class="learning-card">
-          <div class="num">04</div>
-          <div class="title">From individual contributor to mentor</div>
-          <div class="body">Now coaching a junior designer on the same monetization team — on UI/UX fundamentals, product thinking, and how to navigate cross-functional work.</div>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:40px">
-        <p>Simplicity is the hardest thing to design for — and it's worth fighting for. The CEO's reframe that our sellers are normal people, not advertisers, defined every decision I made for three years. It's still the lens I bring to every project.</p>
-      </div>
-    </div>
-  </div>
 
   <!-- THANK YOU -->
   <div class="container">
@@ -1403,6 +1303,38 @@
     <a href="home.html" class="footer-back">Go back to works</a>
     <span class="footer-credit">Divya Karunakaran · Sr. Product Designer</span>
   </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lb">
+    <div class="lb-close" id="lb-close">✕</div>
+    <img id="lb-img" src="" alt="" />
+  </div>
+
+  <script>
+    const overlay = document.getElementById('lb');
+    const lbImg   = document.getElementById('lb-img');
+    const lbClose = document.getElementById('lb-close');
+
+    document.querySelectorAll('img').forEach(img => {
+      if (img.id === 'lb-img') return;
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLb() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    lbClose.addEventListener('click', closeLb);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+  </script>
 
 </body>
 </html>
